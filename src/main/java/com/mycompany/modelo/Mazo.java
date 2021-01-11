@@ -10,9 +10,11 @@ public class Mazo {
     private ArrayList<Carta> mazo;
     private ArrayList<Carta> c_sacadas;
 
+    
+
     public Mazo() {
         
-        /*try (FileReader reader = new FileReader(App.pathCsv)){
+       /* try (FileReader reader = new FileReader(App.pathCsv)){
             BufferedReader br = new BufferedReader(reader);
             String line;
             while ((line = br.readLine()) != null) {
@@ -24,7 +26,7 @@ public class Mazo {
         } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("pos si es aqui gg");
-        }*/ 
+        }*/
     }
 
     public ArrayList<Carta> getMazo() {
