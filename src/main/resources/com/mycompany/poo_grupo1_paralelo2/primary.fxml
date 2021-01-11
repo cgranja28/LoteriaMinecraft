@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.poo_grupo1_paralelo2.PrimaryController">
+<StackPane maxHeight="350.0" maxWidth="600.0" minHeight="350.0" minWidth="600.0" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.poo_grupo1_paralelo2.PrimaryController">
    <children>
-      <Label text="Primary View" />
-      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Juego" />
+      <ImageView fitHeight="337.0" fitWidth="597.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/firstbackground.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="USERNAME" textAlignment="CENTER">
+                     <font>
+                        <Font name="Bodoni MT Black" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tusername" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="135.0" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <Button fx:id="bsettings" mnemonicParsing="false" onAction="#switchToSettings" text="SETTINGS">
+                     <font>
+                        <Font name="Dubai Medium" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="primaryButton" layoutX="285.0" layoutY="48.0" mnemonicParsing="false" onAction="#switchToSecondary" text="START">
+                     <font>
+                        <Font name="Dubai Light" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="bexit" layoutX="310.0" layoutY="48.0" mnemonicParsing="false" text="EXIT" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
-   <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </padding>
-</VBox>
+</StackPane>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.poo_grupo1_paralelo2.SettingsController">
+   <children>
+      <ImageView fitHeight="437.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/settbackground.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="378.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/sett2background.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="35.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/textsettings.png" />
+               </image></ImageView>
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0">
+               <children>
+                  <Label text="Oponnents">
+                     <font>
+                        <Font name="Cooper Black" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbOponnents" prefHeight="25.0" prefWidth="177.0" promptText="Select number-default (0)" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="99.0" prefHeight="56.0" prefWidth="600.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="78.0" text="Alignment" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Cooper Black" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbAlignment" prefHeight="25.0" prefWidth="177.0" promptText="Random" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="42.0" prefHeight="56.0" prefWidth="600.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="135.0" text="Opponent's cards" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="Cooper Black" size="14.0" />
+                     </font>
+                  </Label>
+                  <CheckBox fx:id="chbVisibility" mnemonicParsing="false" text="Visibility" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="155.0" prefHeight="56.0" prefWidth="600.0" spacing="50.0">
+               <children>
+                  <Button fx:id="bsDone" mnemonicParsing="false" text="Done" />
+                  <Button fx:id="bsExit" mnemonicParsing="false" onAction="#switchToPrimary" text="Exit" />
+               </children>
+            </HBox>
+         </children>
+         <StackPane.margin>
+            <Insets top="90.0" />
+         </StackPane.margin>
+      </VBox>
+   </children>
+</StackPane>
