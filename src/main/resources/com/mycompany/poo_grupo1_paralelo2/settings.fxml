@@ -16,19 +16,19 @@
    <children>
       <ImageView fitHeight="437.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/settbackground.png" />
+            <Image url="@../../../images/settbackground.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="378.0" fitWidth="380.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/sett2background.png" />
+            <Image url="@../../../images/sett2background.png" />
          </image>
       </ImageView>
       <VBox alignment="TOP_CENTER" prefHeight="316.0" prefWidth="600.0">
          <children>
             <ImageView fitHeight="35.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/textsettings.png" />
+                  <Image url="@../../../images/textsettings.png" />
                </image></ImageView>
             <HBox alignment="CENTER" prefHeight="57.0" prefWidth="600.0" spacing="10.0">
                <children>
