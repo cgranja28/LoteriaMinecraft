@@ -16,7 +16,6 @@ public class JuegoController {
     @FXML Button boton = new Button();
     @FXML Label lbT;
     
-    
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
@@ -25,10 +24,10 @@ public class JuegoController {
     @FXML
     private void initialize() {
         lbT = new Label("LOTERIA");
-        for (int i=0;i<16;i++){
+        for (int i=0;i<15;i++){
             StackPane sp = new StackPane();
-            int fila = i/4;
-            int columna = i%4;
+            int fila = i/3;
+            int columna = i%3;
             Label lb = new Label("label"+fila+"-"+columna);
             sp.getChildren().add(lb);
             gridP.add(sp, columna, fila);

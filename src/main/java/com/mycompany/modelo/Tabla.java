@@ -1,7 +1,6 @@
 package com.mycompany.modelo;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Tabla {
     private boolean loteria;
@@ -12,17 +11,7 @@ public class Tabla {
         this.loteria = loteria;
         this.cartas = cartas;
         this.c_marcadas = c_marcadas;
-        }
-    
-    
-    /*public Tabla(Mazo mazo) {
-        Random rand = new Random(); 
-        for (int i=0; i<16; i++){
-            int num = rand.nextInt(54);
-            Carta carta = mazo.getMazo().get(num);
-            cartas.add(carta);
-        }
-    }*/
+    }
 
     public boolean isLoteria() {
         return loteria;
