@@ -15,16 +15,11 @@
    <children>
       <ImageView fitHeight="337.0" fitWidth="597.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/firstbackground.png" />
+            <Image url="@../../../images/MainBackground.png" />
          </image>
       </ImageView>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <ImageView fitHeight="47.0" fitWidth="278.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/lottery.png" />
-               </image>
-            </ImageView>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="USERNAME" textAlignment="CENTER">
@@ -43,6 +38,11 @@
                      </font>
                   </Button>
                   <Button fx:id="primaryButton" layoutX="285.0" layoutY="48.0" mnemonicParsing="false" onAction="#switchToSecondary" text="START">
+                     <font>
+                        <Font name="Dubai Light" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="breport" layoutX="300.0" layoutY="45.0" mnemonicParsing="false" onAction="#switchToReporte" text="REPORT">
                      <font>
                         <Font name="Dubai Light" size="12.0" />
                      </font>

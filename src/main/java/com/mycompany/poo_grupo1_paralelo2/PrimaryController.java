@@ -17,6 +17,8 @@ public class PrimaryController {
     private Button primaryButton;
     @FXML
     private Button bexit;
+    @FXML
+    private Button breport;
 
     @FXML
     private void switchToSecondary() throws IOException {
@@ -30,7 +32,7 @@ public class PrimaryController {
     }
     @FXML
     private void switchToReporte() throws IOException {
-        App.setRoot("reporte");
+        App.setRoot("report");
     }
 
     

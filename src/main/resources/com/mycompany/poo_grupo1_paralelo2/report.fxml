@@ -36,7 +36,7 @@
                         <Font name="Cooper Black" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="cbOponnents" prefHeight="25.0" prefWidth="177.0" promptText="Select number-default (0)" />
+                  <ComboBox fx:id="cbGames" prefHeight="25.0" prefWidth="177.0" promptText="Select number-default (0)" />
                </children>
             </HBox>
             <GridPane alignment="CENTER" prefHeight="162.0" prefWidth="327.0">
@@ -86,8 +86,8 @@
             </GridPane>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="155.0" prefHeight="56.0" prefWidth="600.0" spacing="50.0">
                <children>
-                  <Button fx:id="bsDone" mnemonicParsing="false" text="Show" />
-                  <Button fx:id="bsExit" mnemonicParsing="false" onAction="#switchToPrimary" text="Exit" />
+                  <Button fx:id="bsShow" mnemonicParsing="false" text="Show" />
+                  <Button fx:id="bsExit2Pri" mnemonicParsing="false" onAction="#switchToPrimary" text="Exit" />
                </children>
             </HBox>
          </children>
