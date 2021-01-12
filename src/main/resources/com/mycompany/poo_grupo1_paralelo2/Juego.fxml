@@ -29,7 +29,7 @@
          <children>
             <BorderPane fx:id="bP" prefHeight="570.0" prefWidth="786.0">
                <right>
-                  <Button fx:id="boton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="267.0" prefWidth="110.0" text="LOTERIA" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+                  <Button fx:id="boton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="267.0" prefWidth="110.0" text="LOTERIA" textAlignment="CENTER" BorderPane.alignment="CENTER" />
                </right>
                <center>
                   <GridPane fx:id="gridP" prefHeight="530.0" prefWidth="389.0" BorderPane.alignment="CENTER">
