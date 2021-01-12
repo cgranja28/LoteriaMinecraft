@@ -12,9 +12,9 @@ import javafx.scene.layout.StackPane;
 public class JuegoController {
     @FXML GridPane gridP;
     @FXML BorderPane bP = new BorderPane();
-    @FXML SplitPane sP = new SplitPane();
+    SplitPane sP = new SplitPane();
     @FXML Button boton = new Button();
-    @FXML Label lbT;
+    Label lbT;
     
     @FXML
     private void switchToPrimary() throws IOException {
