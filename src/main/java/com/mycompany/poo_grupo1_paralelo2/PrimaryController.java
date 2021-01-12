@@ -28,6 +28,10 @@ public class PrimaryController {
     private void switchToSettings() throws IOException {
         App.setRoot("settings");
     }
+    @FXML
+    private void switchToReporte() throws IOException {
+        App.setRoot("reporte");
+    }
 
     
     /*
