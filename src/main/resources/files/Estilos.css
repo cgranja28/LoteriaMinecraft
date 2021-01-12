@@ -1,0 +1,38 @@
+#FisrtBackG{
+    -fx-background-image: url("@../../../images/MainBackground.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
+
+#SettBackG{
+    -fx-background-image: url("@../../../images/settingsbackgrpund.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
+
+
+#ReportBackG{
+    -fx-background-image: url("@../../../images/BackgroundReporte.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
+
+#JuegoBackG{
+    -fx-background-image: url("@../../../images/Background.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: stretch;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
+
+#VBox{
+    -fx-alignment: center;
+    
+}
+
