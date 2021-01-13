@@ -22,8 +22,8 @@ public class PrimaryController {
 
     @FXML
     private void switchToSettings() throws IOException {
-        Usuario user = new Usuario(tusername.getText(), new Tabla(false,new ArrayList<Carta>() ,new ArrayList<Boolean> ()));
-        System.out.println(user);
+        //Usuario user = new Usuario(tusername.getText(), new Tabla(false,new ArrayList<Carta>() ,new ArrayList<Boolean> ()));
+        //System.out.println(user);
         App.setRoot("settings");
     }
     @FXML
