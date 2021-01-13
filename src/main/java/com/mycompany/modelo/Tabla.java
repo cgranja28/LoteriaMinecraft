@@ -12,11 +12,14 @@ public class Tabla {
         cartas = new ArrayList<Carta>();
         c_marcadas = new ArrayList<Boolean>();
         Random rand = new Random();
+        int n=1;
         for (int i=0; i<16; i++){
             int num = rand.nextInt(54);
+            if (!(cartas.contains(m.getMazo().get(num)))){
             Carta carta = m.getMazo().get(num);
             cartas.add(carta);
-        }
+        }else{i--;}
+       }
     }
     
     
