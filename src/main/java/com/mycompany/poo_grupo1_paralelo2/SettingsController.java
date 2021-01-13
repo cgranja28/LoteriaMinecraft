@@ -10,10 +10,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-
 /**
  * FXML Controller class
  *
@@ -21,25 +21,26 @@ import javafx.scene.control.ComboBox;
  */
 public class SettingsController implements Initializable {
 
-    @FXML
-    private ComboBox<?> cbOponnents;
-    @FXML
-    private ComboBox<?> cbAlignment;
-    @FXML
-    private CheckBox chbVisibility;
-    @FXML
-    private Button bsDone;
-    @FXML
-    private Button bsExit;
 
+    @FXML
+    private Button bDone2;
+    @FXML
+    private Button bExit2;
+    @FXML
+    private ComboBox<?> CBxOpponents;
+    @FXML
+    private CheckBox ChVisible;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }    
+    @FXML
+    private void switchToJuego() throws IOException {
+        App.setRoot("Juego");
     }
-
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
