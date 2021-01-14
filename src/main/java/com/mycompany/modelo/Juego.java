@@ -1,6 +1,7 @@
 package com.mycompany.modelo;
+import java.io.Serializable;
 import java.util.*;
-public class Juego {
+public class Juego implements Serializable {
     private int id_juego;
     private Usuario usuario;
     private Mazo mazo;

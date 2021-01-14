@@ -1,6 +1,8 @@
 package com.mycompany.modelo;
 
-public class Carta {
+import java.io.Serializable;
+
+public class Carta implements Serializable {
     private int id;
     private String nombre;
 

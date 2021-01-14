@@ -1,6 +1,8 @@
 package com.mycompany.modelo;
 
-public class Computadora extends Jugador {
+import java.io.Serializable;
+
+public class Computadora extends Jugador implements Serializable {
     
     //CONSTRUCTOR
     public Computadora(Tabla tabla) {

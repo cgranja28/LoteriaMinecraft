@@ -5,9 +5,10 @@ package com.mycompany.modelo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Mazo {
+public class Mazo implements Serializable {
     private ArrayList<Carta> mazo;
     private ArrayList<Carta> c_sacadas;
     

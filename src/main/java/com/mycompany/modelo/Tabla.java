@@ -1,9 +1,10 @@
 package com.mycompany.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Tabla {
+public class Tabla implements Serializable {
     private boolean loteria;
     private ArrayList<Carta> cartas;
     private ArrayList<Boolean> c_marcadas;

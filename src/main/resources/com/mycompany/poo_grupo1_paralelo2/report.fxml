@@ -7,41 +7,48 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 
-
-<BorderPane id="ReportBackG" prefHeight="553.0" prefWidth="757.0" stylesheets="@../../../files/Estilos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.poo_grupo1_paralelo2.SettingsController">
-   <bottom>
-      <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToPrimary" text="Exit" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="40.0" />
-         </BorderPane.margin>
-      </Button>
-   </bottom>
-   <center>
-      <TableView id="MarcoMine" maxWidth="600.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../files/Estilos.css" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Date" />
-          <TableColumn prefWidth="75.0" text="Duration" />
-            <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="75.0" text="Opponents" />
-            <TableColumn prefWidth="75.0" text="Alignment" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-         <BorderPane.margin>
-            <Insets bottom="40.0" left="100.0" right="100.0" />
-         </BorderPane.margin>
-      </TableView>
-   </center>
-   <top>
-      <ImageView fitHeight="60.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../../../images/Report.png" />
-         </image>
-         <BorderPane.margin>
-            <Insets top="50.0" />
-         </BorderPane.margin>
-      </ImageView>
-   </top>
-</BorderPane>
+<StackPane id="ReportBackG" stylesheets="@../../../files/Estilos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.poo_grupo1_paralelo2.SettingsController">
+   <children>
+      <BorderPane id="MarcoMine" maxHeight="500.0" maxWidth="600.0" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../../files/Estilos.css">
+         <bottom>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="25.0" prefWidth="92.0" text="EXIT" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="30.0" />
+               </BorderPane.margin>
+            </Button>
+         </bottom>
+         <center>
+            <TableView maxHeight="300.0" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Date" />
+                <TableColumn prefWidth="75.0" text="Duration" />
+                  <TableColumn prefWidth="75.0" text="Name" />
+                  <TableColumn prefWidth="75.0" text="Opponents" />
+                  <TableColumn prefWidth="75.0" text="Alignment" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <BorderPane.margin>
+                  <Insets bottom="75.0" left="75.0" right="75.0" top="25.0" />
+               </BorderPane.margin>
+            </TableView>
+         </center>
+         <top>
+            <ImageView fitHeight="73.0" fitWidth="271.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../../../images/Report.png" />
+               </image>
+               <BorderPane.margin>
+                  <Insets bottom="10.0" />
+               </BorderPane.margin>
+            </ImageView>
+         </top>
+         <StackPane.margin>
+            <Insets bottom="100.0" left="70.0" right="70.0" top="100.0" />
+         </StackPane.margin>
+      </BorderPane>
+   </children>
+</StackPane>

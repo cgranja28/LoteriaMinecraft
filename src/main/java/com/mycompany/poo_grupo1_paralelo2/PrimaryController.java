@@ -7,8 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import com.mycompany.modelo.*;
 import java.util.ArrayList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
 public class PrimaryController {
-
+    private String user;
     @FXML
     private TextField tusername;
     @FXML
@@ -19,18 +21,29 @@ public class PrimaryController {
     private Button bexit;
     @FXML
     private Button breport;
-
+    
+    /*@FXML
+    private void switchToSettings() throws IOException {
+        n_opponents = new ArrayList<Integer>();
+        n_opponents.add(0);
+        n_opponents.add(1);
+        n_opponents.add(2);
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("settings.fxml"));//no tiene el controlador especificado
+        fxmlLoader.setController(new SettingsController(n_opponents));//se asigna el controlador enviando las listas que necesita
+        App.setRoot("settings");
+    }*/
     @FXML
     private void switchToSettings() throws IOException {
-        //Usuario user = new Usuario(tusername.getText(), new Tabla(false,new ArrayList<Carta>() ,new ArrayList<Boolean> ()));
-        //System.out.println(user);
+        user = tusername.getText();
         App.setRoot("settings");
     }
     @FXML
     private void switchToReporte() throws IOException {
         App.setRoot("report");
     }
-
+    
+    
 
     
     /*
@@ -66,6 +79,10 @@ public class PrimaryController {
     }
 
     */
+
+    public String getUser() {
+        return user;
+    }
     
         
 }

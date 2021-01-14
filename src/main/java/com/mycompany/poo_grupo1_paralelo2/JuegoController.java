@@ -3,6 +3,7 @@ package com.mycompany.poo_grupo1_paralelo2;
 import com.mycompany.modelo.Carta;
 import com.mycompany.modelo.Mazo;
 import com.mycompany.modelo.Tabla;
+import com.mycompany.modelo.Usuario;
 import java.io.IOException;
 import java.io.InputStream;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -21,7 +23,6 @@ public class JuegoController {
     @FXML GridPane gridP2;
     @FXML BorderPane bP;
     @FXML Button boton;
-    
     
     @FXML
     private void switchToPrimary() throws IOException {
@@ -67,9 +68,7 @@ public class JuegoController {
                 Image x = new Image(Xfile, 100, 120, false, false);
                 sp.getChildren().add(new ImageView(x));
             });
-            
-            
-            
+
         }
     }
     

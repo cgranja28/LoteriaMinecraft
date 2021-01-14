@@ -1,7 +1,9 @@
 
 package com.mycompany.modelo;
 
-public abstract class Jugador {
+import java.io.Serializable;
+
+public abstract class Jugador implements Serializable {
     private boolean ganador;
     private Tabla tabla;
     

@@ -1,8 +1,9 @@
 package com.mycompany.modelo;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Alineacion {
+public class Alineacion implements Serializable {
     private int id;
     private String nombre;
     private ArrayList<List<Integer>> combinaciones;

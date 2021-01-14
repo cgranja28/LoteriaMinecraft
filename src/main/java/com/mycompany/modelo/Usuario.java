@@ -1,7 +1,9 @@
 
 package com.mycompany.modelo;
 
-public class Usuario extends Jugador {
+import java.io.Serializable;
+
+public class Usuario extends Jugador implements Serializable {
    private String nombre;
     
    //CONSTRUCTOR

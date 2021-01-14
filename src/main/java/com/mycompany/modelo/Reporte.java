@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 import java.text.*;
 
-public class Reporte {
+public class Reporte implements Serializable {
     private ArrayList<Juego> juegos;
     private ArrayList<String> juegoReporte;
     //CONSTRUCTOR
