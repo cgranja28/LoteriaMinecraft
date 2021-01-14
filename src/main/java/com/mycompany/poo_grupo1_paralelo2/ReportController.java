@@ -5,9 +5,13 @@
  */
 package com.mycompany.poo_grupo1_paralelo2;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -15,7 +19,8 @@ import javafx.fxml.Initializable;
  * @author Elix
  */
 public class ReportController implements Initializable {
-
+    @FXML
+    private TableView<?> tbReport;
     /**
      * Initializes the controller class.
      */
@@ -23,5 +28,10 @@ public class ReportController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void switchToPrimary() throws IOException {
+        App.setRoot("primary");
+    }
     
 }

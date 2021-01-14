@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane id="ReportBackG" stylesheets="@../../../files/Estilos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.poo_grupo1_paralelo2.SettingsController">
+<StackPane id="ReportBackG" stylesheets="@../../../files/Estilos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.poo_grupo1_paralelo2.ReportController">
    <children>
       <BorderPane id="MarcoMine" maxHeight="500.0" maxWidth="600.0" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../../files/Estilos.css">
          <bottom>
@@ -20,7 +20,7 @@
             </Button>
          </bottom>
          <center>
-            <TableView maxHeight="300.0" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tbReport" maxHeight="300.0" maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn prefWidth="75.0" text="Date" />
                 <TableColumn prefWidth="75.0" text="Duration" />

@@ -15,18 +15,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 
 public class SettingsController implements Initializable {
 
     
     @FXML
-    private Button bDone2;
-    @FXML
-    private Button bExit2;
-    @FXML
     private ComboBox<String>  CBxOpponents;
     @FXML
     private CheckBox ChVisible;
+    @FXML
+    private Button bDone2;
+    @FXML
+    private Button bExit2;
+    
     
     
     @Override
