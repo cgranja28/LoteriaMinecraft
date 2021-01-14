@@ -35,9 +35,7 @@ public class JuegoController {
         m.crearMazo();
         Tabla t = new Tabla(m);
         Tabla t2 = new Tabla(m);
-           System.out.println(t2.getCartas().size());
-        
-        
+
         for (int i=0;i<t.getCartas().size();i++){
             StackPane sp = new StackPane();// Creacion stackpane
             StackPane sp2 = new StackPane();

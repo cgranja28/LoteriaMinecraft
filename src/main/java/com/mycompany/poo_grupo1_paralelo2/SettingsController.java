@@ -41,7 +41,6 @@ public class SettingsController implements Initializable {
     private void switchToJuego() throws IOException {
         
         Configuracion configuration = new Configuracion(Integer.parseInt(CBxOpponents.getValue()), ChVisible.isSelected());
-        System.out.println(configuration);
         
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(App.pathSettigns))){
             out.writeObject(configuration);
