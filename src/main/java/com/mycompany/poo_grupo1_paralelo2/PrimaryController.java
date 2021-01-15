@@ -36,7 +36,13 @@ public class PrimaryController {
     @FXML
     private void switchToSettings() throws IOException {
         user = tusername.getText();
+        Mazo m = new Mazo();
+        Tabla tj = new Tabla(m);
+        Usuario jugador = new Usuario(user, tj);
+        Juego juego = new Juego(jugador, m);
         App.setRoot("settings");
+        
+        
     }
     @FXML
     private void switchToReporte() throws IOException {
