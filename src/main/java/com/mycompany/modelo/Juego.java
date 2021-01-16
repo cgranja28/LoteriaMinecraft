@@ -29,12 +29,16 @@ public class Juego implements Serializable {
     public Juego(Usuario jugador, Mazo mazo) {
         usuario = jugador;
         configuracion = leerConfiguracion();
-        computadoras = new ArrayList<Computadora>();
-        for(int i = 0; i <= configuracion.getNumero_de_oponentes() ; i++){
-            this.computadoras.add(new Computadora(new Tabla(new Mazo())));
-        }
         this.mazo = mazo;
         mazo.crearMazo();
+        this.computadoras = new ArrayList<Computadora>();
+        if (configuracion.getNumero_de_oponentes()!=0) {
+            for(int j = 0; j <= configuracion.getNumero_de_oponentes() ; j++){
+                Computadora c=new Computadora(new Tabla(mazo));
+                this.computadoras.add(c);
+            }
+        }
+        
     }
     
     //METODOS
@@ -94,19 +98,49 @@ public class Juego implements Serializable {
         public void setFecha(Date fecha) {
             this.fecha = fecha;
         }
+
+        public ArrayList<Computadora> getComputadoras() {
+            return computadoras;
+        }
+
+        public void setComputadoras(ArrayList<Computadora> computadoras) {
+            this.computadoras = computadoras;
+        }
+        
+        
         /////////////////////////////////////////////////////
-        public void crearGrid(GridPane gridP, boolean jugador) {
+         public void crearGridComputadora(GridPane gridP) {
+              
+             if (computadoras.size()!=0) {
+                for(int n=0;n<computadoras.size();n++){
+                    Tabla  t=computadoras.get(n).getTabla();
+                    Image image;
+                    for (int i=0;i<t.getCartas().size();i++){
+                    StackPane sp = new StackPane();// Creacion stackpane
+                    int fila = i/4;
+                    int columna = i%4;
+                    Carta c = t.getCartas().get(i);
+                    String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
+                    image = new Image(fileName, 30, 40, false, false);
+                    ImageView imagen = new ImageView(image);
+                    sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
+                    gridP.add(sp, columna, fila);
+            }
+                }
+            }
+             }
+         
+        public void crearGridUsuario(GridPane gridP) {
             
         //Tabla t = usuario.getTabla();
-        Tabla t = null;
-        if(jugador){
+        Tabla  t=usuario.getTabla();
+        /*if(jugador){
             t=usuario.getTabla();
         }else{
             for(int n=0; n<computadoras.size(); n++){
               t=computadoras.get(n).getTabla();
-            }
-            
-        }
+            } 
+        }*/
         Image image;
         for (int i=0;i<t.getCartas().size();i++){
             StackPane sp = new StackPane();// Creacion stackpane
@@ -114,12 +148,12 @@ public class Juego implements Serializable {
             int columna = i%4;
             Carta c = t.getCartas().get(i);
             String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
-            
-            if (jugador){
+            image = new Image(fileName, 100, 120, false, false);
+            /*if (jugador){
                 image = new Image(fileName, 100, 120, false, false);
             }else{
                 image = new Image(fileName, 30, 40, false, false);
-            }
+            }*/
             
             ImageView imagen = new ImageView(image);
             sp.getChildren().add(imagen);// Se añade la imagen al Stackpane

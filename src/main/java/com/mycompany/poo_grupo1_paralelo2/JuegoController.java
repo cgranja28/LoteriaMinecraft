@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 public class JuegoController {
     @FXML GridPane gridP;
     @FXML GridPane gridP2;
+    @FXML GridPane gridP3;
     @FXML BorderPane bP;
     @FXML Button boton;
     @FXML VBox leftVBox;
@@ -49,9 +50,15 @@ public class JuegoController {
         Usuario usuario = new Usuario(user, t);
         Juego juego = new Juego(usuario, m);
         
-        juego.crearGrid(gridP, true);
+        juego.crearGridUsuario(gridP);
         juego.leerAlineacion(leftVBox);
-        juego.crearGrid(gridP2, false);
+        if(juego.getComputadoras().size()==1){
+            juego.crearGridComputadora(gridP2);
+        }
+        if(juego.getComputadoras().size()==2){
+            juego.crearGridComputadora(gridP2);
+            juego.crearGridComputadora(gridP3);
+        }
         
         
         
