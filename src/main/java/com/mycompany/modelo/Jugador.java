@@ -10,12 +10,12 @@ public abstract class Jugador implements Serializable {
     //CONSTRUCTOR
     public Jugador(Tabla tabla){
         this.tabla=tabla;
-        ganador=false;
+        this.ganador=false;
     }
     
     //GETTERS AND SETTERS
     public boolean getGanador() {
-        return ganador;
+        return this.ganador;
     }
 
     public void setGanador(boolean ganador) {

@@ -6,6 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import com.mycompany.modelo.*;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
@@ -36,14 +41,19 @@ public class PrimaryController {
     @FXML
     private void switchToSettings() throws IOException {
         user = tusername.getText();
-        Mazo m = new Mazo();
-        Tabla tj = new Tabla(m);
-        Usuario jugador = new Usuario(user, tj);
-        Juego juego = new Juego(jugador, m);
-        App.setRoot("settings");
-        
+            try {
+            FileWriter writer = new FileWriter(App.pathJuego, false);
+            writer.write(user);
+            writer.close();
+        } catch (IOException e) {
+            
+            e.printStackTrace();
+        }finally{
+                App.setRoot("settings");
+            }
         
     }
+    
     @FXML
     private void switchToReporte() throws IOException {
         App.setRoot("report");

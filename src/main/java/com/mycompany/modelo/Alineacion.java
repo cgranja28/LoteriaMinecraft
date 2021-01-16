@@ -18,7 +18,7 @@ public class Alineacion implements Serializable {
             int op = id;
             switch (op){
               //****************************************ALINEACION 1*****************************************************
-              case 1:
+              case 0:
                 nombre="FILA";
                 combinaciones= new ArrayList<List<Integer>>();
                 combinaciones.add(new ArrayList<>(Arrays.asList(1, 2, 3, 4)));
@@ -27,7 +27,7 @@ public class Alineacion implements Serializable {
                 combinaciones.add(new ArrayList<>(Arrays.asList(13, 14, 15, 16)));
                 break;
               //****************************************ALINEACION 2*****************************************************
-              case 2:
+              case 1:
                 nombre="COLUMNA";
                 combinaciones= new ArrayList<List<Integer>>();
                 combinaciones.add(new ArrayList<>(Arrays.asList(1, 5, 9, 13)));
@@ -36,13 +36,13 @@ public class Alineacion implements Serializable {
                 combinaciones.add(new ArrayList<>(Arrays.asList(4, 8, 12, 16)));
                 break;
               //****************************************ALINEACION 3*****************************************************
-              case 3:
+              case 2:
                 nombre="ESQUINAS";
                 combinaciones= new ArrayList<List<Integer>>();
                 combinaciones.add(new ArrayList<>(Arrays.asList(1, 4, 13,16)));
                 break;
               //****************************************ALINEACION 4*****************************************************
-              case 4:
+              case 3:
                 nombre="JUNTAS 4 EN ESQUINAS";
                 combinaciones= new ArrayList<List<Integer>>();
                 combinaciones.add(new ArrayList<>(Arrays.asList(1, 2, 5, 6)));

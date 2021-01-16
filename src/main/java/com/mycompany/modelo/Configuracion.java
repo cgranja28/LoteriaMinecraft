@@ -47,7 +47,7 @@ public class Configuracion  implements Serializable{
         
         public Alineacion crearAlineacion(){
             Random rand = new Random();
-            int id_alinea = rand.nextInt(4);
+            int id_alinea = rand.nextInt(3);
             Alineacion alinea = new Alineacion(id_alinea);
             return alinea;
         }

@@ -5,8 +5,7 @@ import com.mycompany.modelo.Juego;
 import com.mycompany.modelo.Mazo;
 import com.mycompany.modelo.Tabla;
 import com.mycompany.modelo.Usuario;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -32,8 +31,24 @@ public class JuegoController {
     
     @FXML
     private void initialize() {
-        /*juego.crearGrid(gridP, true);
-        juego.crearGrid(gridP2, false);*/
+        String user="";
+	try {
+            FileReader reader = new FileReader(App.pathJuego);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            
+            user=bufferedReader.readLine();
+            
+            reader.close();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }             
+        Mazo m = new Mazo();
+        Tabla t = new Tabla(m);
+        Usuario usuario = new Usuario(user, t);
+        Juego juego = new Juego(usuario, m);
+        juego.crearGrid(gridP, true);
+        juego.crearGrid(gridP2, false);
         
     }
     

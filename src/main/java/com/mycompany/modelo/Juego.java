@@ -116,5 +116,11 @@ public class Juego implements Serializable {
         //LOTERIA
         public void loteria(){
         }
+
+    @Override
+    public String toString() {
+        return "Juego{" + "id_juego=" + id_juego + ", usuario=" + usuario + ", mazo=" + mazo + ", alineacion=" + alineacion + ", configuracion=" + configuracion + ", duracion=" + duracion + ", fecha=" + fecha + '}';
+    }
+        
         
 }

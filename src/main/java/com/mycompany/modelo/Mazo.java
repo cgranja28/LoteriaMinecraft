@@ -13,25 +13,27 @@ public class Mazo implements Serializable {
     private ArrayList<Carta> c_sacadas;
     
     public Mazo() {
-        mazo = new ArrayList<Carta>();
+        mazo = crearMazo();
         c_sacadas = new ArrayList<Carta>();
+        
     }
 
-    public void crearMazo() {
-        
+    public ArrayList<Carta> crearMazo() {
+        ArrayList<Carta> cartss = new ArrayList<Carta>();
         try (FileReader reader = new FileReader("src/main/resources/files/cartasloteria.csv")){
             BufferedReader br = new BufferedReader(reader);
             String line;
             while ((line = br.readLine()) != null) {
                 String[] ln = line.split(",");
                 Carta carta = new Carta(Integer.parseInt(ln[0]),ln[1]);
-                mazo.add(carta);
+                cartss.add(carta);
             }
             
         } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("pos si es aqui gg");
         }
+        return cartss;
     }
 
     public ArrayList<Carta> getMazo() {
