@@ -25,6 +25,8 @@ public class JuegoController {
     @FXML BorderPane bP;
     @FXML Button boton;
     @FXML VBox leftVBox;
+    @FXML ImageView alineacion;
+    
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
@@ -51,7 +53,7 @@ public class JuegoController {
         Juego juego = new Juego(usuario, m);
         
         juego.crearGridUsuario(gridP);
-        juego.leerAlineacion(leftVBox);
+        juego.leerAlineacion(leftVBox, alineacion);
         if(juego.getComputadoras().size()==1){
             juego.crearGridComputadora(gridP2);
         }

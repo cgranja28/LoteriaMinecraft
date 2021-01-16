@@ -109,26 +109,26 @@ public class Juego implements Serializable {
         
         
         /////////////////////////////////////////////////////
-         public void crearGridComputadora(GridPane gridP) {
+        public void crearGridComputadora(GridPane gridP) {
               
-             if (computadoras.size()!=0) {
+            if (computadoras.size()!=0) {
                 for(int n=0;n<computadoras.size();n++){
                     Tabla  t=computadoras.get(n).getTabla();
                     Image image;
                     for (int i=0;i<t.getCartas().size();i++){
-                    StackPane sp = new StackPane();// Creacion stackpane
-                    int fila = i/4;
-                    int columna = i%4;
-                    Carta c = t.getCartas().get(i);
-                    String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
-                    image = new Image(fileName, 30, 40, false, false);
-                    ImageView imagen = new ImageView(image);
-                    sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
-                    gridP.add(sp, columna, fila);
-            }
+                        StackPane sp = new StackPane();// Creacion stackpane
+                        int fila = i/4;
+                        int columna = i%4;
+                        Carta c = t.getCartas().get(i);
+                        String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
+                        image = new Image(fileName, 30, 40, false, false);
+                        ImageView imagen = new ImageView(image);
+                        sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
+                        gridP.add(sp, columna, fila);
+                    }
                 }
             }
-             }
+        }
          
         public void crearGridUsuario(GridPane gridP) {
             
@@ -183,7 +183,7 @@ public class Juego implements Serializable {
         return confi;
         }
         
-        public void leerAlineacion(VBox leftVBox){
+        public void leerAlineacion(VBox leftVBox, ImageView imagen){
             Configuracion settings=null;
 		try {
 			InputStream file = new FileInputStream(App.pathSettigns);
@@ -200,10 +200,11 @@ public class Juego implements Serializable {
 		}
             int ali= settings.getAlineacion().getId();
             String pathaligment ="images/"+ali+".png";
-            ImageView imagen = new ImageView(pathaligment);
+            imagen = new ImageView(pathaligment);
             imagen.setFitHeight(200);
             imagen.setFitWidth(150);
-            leftVBox.getChildren().add(imagen);
+            //leftVBox.getChildren().add(imagen);
+            leftVBox.getChildren().set(0, imagen);
 
         }
         
