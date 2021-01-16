@@ -16,14 +16,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class JuegoController {
     @FXML GridPane gridP;
     @FXML GridPane gridP2;
     @FXML BorderPane bP;
     @FXML Button boton;
-    
+    @FXML VBox leftVBox;
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
@@ -44,11 +44,16 @@ public class JuegoController {
             e.printStackTrace();
         }             
         Mazo m = new Mazo();
+        
         Tabla t = new Tabla(m);
         Usuario usuario = new Usuario(user, t);
         Juego juego = new Juego(usuario, m);
+        
         juego.crearGrid(gridP, true);
+        juego.leerAlineacion(leftVBox);
         juego.crearGrid(gridP2, false);
+        
+        
         
     }
     

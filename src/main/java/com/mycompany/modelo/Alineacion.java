@@ -42,7 +42,7 @@ public class Alineacion implements Serializable {
                 combinaciones.add(new ArrayList<>(Arrays.asList(1, 4, 13,16)));
                 break;
               //****************************************ALINEACION 4*****************************************************
-              case 3:
+              case 3    :
                 nombre="JUNTAS 4 EN ESQUINAS";
                 combinaciones= new ArrayList<List<Integer>>();
                 combinaciones.add(new ArrayList<>(Arrays.asList(1, 2, 5, 6)));

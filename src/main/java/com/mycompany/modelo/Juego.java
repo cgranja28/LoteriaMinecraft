@@ -1,10 +1,19 @@
 package com.mycompany.modelo;
+import com.mycompany.poo_grupo1_paralelo2.App;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 public class Juego implements Serializable {
     private int id_juego;
     private Usuario usuario;
@@ -14,11 +23,16 @@ public class Juego implements Serializable {
     private Configuracion configuracion;
     private double duracion;
     private Date fecha;
+    private ArrayList<Computadora> computadoras;
     
     //CONSTRUCTOR
     public Juego(Usuario jugador, Mazo mazo) {
         usuario = jugador;
-        configuracion = new Configuracion(1,true);
+        configuracion = leerConfiguracion();
+        computadoras = new ArrayList<Computadora>();
+        for(int i = 0; i <= configuracion.getNumero_de_oponentes() ; i++){
+            this.computadoras.add(new Computadora(new Tabla(new Mazo())));
+        }
         this.mazo = mazo;
         mazo.crearMazo();
     }
@@ -80,9 +94,19 @@ public class Juego implements Serializable {
         public void setFecha(Date fecha) {
             this.fecha = fecha;
         }
-        
+        /////////////////////////////////////////////////////
         public void crearGrid(GridPane gridP, boolean jugador) {
-        Tabla t = usuario.getTabla();
+            
+        //Tabla t = usuario.getTabla();
+        Tabla t = null;
+        if(jugador){
+            t=usuario.getTabla();
+        }else{
+            for(int n=0; n<computadoras.size(); n++){
+              t=computadoras.get(n).getTabla();
+            }
+            
+        }
         Image image;
         for (int i=0;i<t.getCartas().size();i++){
             StackPane sp = new StackPane();// Creacion stackpane
@@ -106,6 +130,47 @@ public class Juego implements Serializable {
                 sp.getChildren().add(new ImageView(x));
             });
         }
+        }
+        /////////////////////////////////////////////////////
+        public Configuracion leerConfiguracion(){
+           ObjectInputStream in;
+        Configuracion confi=null;
+        try {
+            in = new ObjectInputStream(new FileInputStream(App.pathSettigns));
+            confi = (Configuracion) in.readObject();//hay que hacer casting
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("IOException:" + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.out.println("ClassNotFoundException:" + ex.getMessage());
+        }
+
+        return confi;
+        }
+        
+        public void leerAlineacion(VBox leftVBox){
+            Configuracion settings=null;
+		try {
+			InputStream file = new FileInputStream(App.pathSettigns);
+			InputStream buffer = new BufferedInputStream(file);
+			ObjectInput input = new ObjectInputStream(buffer);
+			
+			 settings = (Configuracion)input.readObject();
+                         
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		catch(IOException ex){
+			ex.printStackTrace();
+		}
+            int ali= settings.getAlineacion().getId();
+            String pathaligment ="images/"+ali+".png";
+            ImageView imagen = new ImageView(pathaligment);
+            imagen.setFitHeight(200);
+            imagen.setFitWidth(150);
+            leftVBox.getChildren().add(imagen);
+
         }
         
         //INICIAR JUEGO 

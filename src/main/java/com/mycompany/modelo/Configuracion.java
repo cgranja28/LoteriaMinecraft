@@ -13,7 +13,7 @@ public class Configuracion  implements Serializable{
     public Configuracion(int numero_de_oponentes, boolean visibilidad){
         this.numero_de_oponentes = numero_de_oponentes;
         this.visibilidad = visibilidad;
-        alineacion = crearAlineacion();
+        this.alineacion = crearAlineacion();
     }
 
     
@@ -27,7 +27,7 @@ public class Configuracion  implements Serializable{
             this.numero_de_oponentes = numero_de_oponentes;
         }
         /////////////////////////////////////////////////////
-        public boolean isVisibilidad() {
+        public boolean getVisibilidad() {
             return visibilidad;
         }
         /////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ public class Configuracion  implements Serializable{
         
         public Alineacion crearAlineacion(){
             Random rand = new Random();
-            int id_alinea = rand.nextInt(3);
+            int id_alinea = rand.nextInt(4);
             Alineacion alinea = new Alineacion(id_alinea);
             return alinea;
         }
