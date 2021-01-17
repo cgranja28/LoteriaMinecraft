@@ -109,61 +109,61 @@ public class Juego implements Serializable {
         
         
         /////////////////////////////////////////////////////
-        public void crearGridComputadora(GridPane gridP) {
-              
-            if (computadoras.size()!=0) {
-                for(int n=0;n<computadoras.size();n++){
-                    Tabla  t=computadoras.get(n).getTabla();
-                    Image image;
-                    for (int i=0;i<t.getCartas().size();i++){
-                        StackPane sp = new StackPane();// Creacion stackpane
-                        int fila = i/4;
-                        int columna = i%4;
-                        Carta c = t.getCartas().get(i);
-                        String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
-                        image = new Image(fileName, 30, 40, false, false);
-                        ImageView imagen = new ImageView(image);
-                        sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
-                        gridP.add(sp, columna, fila);
-                    }
-                }
+        public void crearGridComputadora(Juego juego, VBox vbox, GridPane gridP2, GridPane gridP3, int num_comp) {
+            if(num_comp==0){
+            vbox.getChildren().remove(gridP2);
+            vbox.getChildren().remove(gridP3);
             }
+            else if(num_comp-1==1){
+                juego.crearGridUsuario(gridP2, false, 30, 40);
+                gridP2.setMaxSize(160, 160);
+                vbox.getChildren().remove(2);
+            }
+            else if(num_comp-1==2){
+                juego.crearGridUsuario(gridP2, false, 30, 40);
+                juego.crearGridUsuario(gridP3, false, 30, 40);
+                gridP2.setMaxSize(200, 200);
+                gridP3.setMaxSize(200, 200);
+            }
+            
         }
          
-        public void crearGridUsuario(GridPane gridP) {
+        public void crearGridUsuario(GridPane gridP, boolean jugador, int x,int y) {
             
-        //Tabla t = usuario.getTabla();
-        Tabla  t=usuario.getTabla();
-        /*if(jugador){
-            t=usuario.getTabla();
-        }else{
-            for(int n=0; n<computadoras.size(); n++){
-              t=computadoras.get(n).getTabla();
-            } 
-        }*/
-        Image image;
-        for (int i=0;i<t.getCartas().size();i++){
-            StackPane sp = new StackPane();// Creacion stackpane
-            int fila = i/4;
-            int columna = i%4;
-            Carta c = t.getCartas().get(i);
-            String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
-            image = new Image(fileName, 100, 120, false, false);
-            /*if (jugador){
-                image = new Image(fileName, 100, 120, false, false);
+            //Tabla t = usuario.getTabla();
+            Tabla  t=usuario.getTabla();
+            /*if(jugador){
+                t=usuario.getTabla();
             }else{
-                image = new Image(fileName, 30, 40, false, false);
+                for(int n=0; n<computadoras.size(); n++){
+                  t=computadoras.get(n).getTabla();
+                } 
             }*/
-            
-            ImageView imagen = new ImageView(image);
-            sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
-            gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane
-            sp.setOnMouseClicked(e->{
-                String Xfile ="images/esmeralda.png";
-                Image x = new Image(Xfile, 100, 120, false, false);
-                sp.getChildren().add(new ImageView(x));
-            });
-        }
+            Image image;
+            for (int i=0;i<t.getCartas().size();i++){
+                StackPane sp = new StackPane();// Creacion stackpane
+                int fila = i/4;
+                int columna = i%4;
+                Carta c = t.getCartas().get(i);
+                String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
+                image = new Image(fileName, x, y, false, false);
+                /*if (jugador){
+                    image = new Image(fileName, 100, 120, false, false);
+                }else{
+                    image = new Image(fileName, 30, 40, false, false);
+                }*/
+
+                ImageView imagen = new ImageView(image);
+                sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
+                gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane
+                if (jugador){
+                    sp.setOnMouseClicked(e->{
+                        String Xfile ="images/esmeralda.png";
+                        Image X = new Image(Xfile, x, y, false, false);
+                        sp.getChildren().add(new ImageView(X));
+                    });
+                }
+            }
         }
         /////////////////////////////////////////////////////
         public Configuracion leerConfiguracion(){

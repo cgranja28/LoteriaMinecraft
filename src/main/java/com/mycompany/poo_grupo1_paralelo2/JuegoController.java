@@ -52,15 +52,12 @@ public class JuegoController {
         Usuario usuario = new Usuario(user, t);
         Juego juego = new Juego(usuario, m);
         
-        juego.crearGridUsuario(gridP);
+        juego.crearGridUsuario(gridP, true,100,120);
         juego.leerAlineacion(leftVBox, alineacion);
-        if(juego.getComputadoras().size()==1){
-            juego.crearGridComputadora(gridP2);
-        }
-        if(juego.getComputadoras().size()==2){
-            juego.crearGridComputadora(gridP2);
-            juego.crearGridComputadora(gridP3);
-        }
+        System.out.println(juego.getComputadoras().size());
+        int num_c=juego.getComputadoras().size();
+        juego.crearGridComputadora(juego, leftVBox, gridP2, gridP3, num_c);
+        
         
         
         
