@@ -146,15 +146,20 @@ public class Juego implements Serializable {
                 String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
                 image = new Image(fileName, x, y, false, false);
                 ImageView imagen = new ImageView(image);
+                
                 sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
-                sp.setId(String.valueOf(c.getId()));
+                
+                imagen.setId(String.valueOf(c.getId()));
+                System.out.println(imagen.getId());
                 gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane
-                if (jugador){
-                    sp.setOnMouseClicked(e->{
+                
+                
+                
+                    imagen.setOnMouseClicked(e->{
                     Xfile z= new Xfile(sp,imagen);
                     z.start();
                     });
-                }
+                
             }
         }
         
@@ -214,32 +219,45 @@ public class Juego implements Serializable {
     public String toString() {
         return "Juego{" + "id_juego=" + id_juego + ", usuario=" + usuario + ", mazo=" + mazo + ", alineacion=" + alineacion + ", configuracion=" + configuracion + ", duracion=" + duracion + ", fecha=" + fecha + '}';
     }
-        
-     private class Xfile extends Thread{
-        @FXML StackPane sp;
-        @FXML ImageView imagen;
+     
+     public class Xfile extends Thread{
+        StackPane sp;
+        ImageView imagen;
         public Xfile(StackPane sp,ImageView imagen){
             this.sp=sp;
             this.imagen=imagen;
         }
         @Override
+        @FXML
         public void run() {
+            System.out.println("ESTA ENTRANDO 1");
+            
             for(int n=1;n<mazo.getC_sacadas().size()+1;n++){
-            if(String.valueOf(mazo.getC_sacadas().get(n).getId()).equals(sp.getId())){
-            String Xfile ="images/esmeralda.png";
-            Image X = new Image(Xfile, 100, 120, false, false);
-            sp.getChildren().add(new ImageView(X));
-                }else{
+                System.out.println("SACADAS-MAZO "+mazo.getC_sacadas().get(n).getId());
+                System.out.println("MARCADA POR MUA "+imagen.getId()); 
                 try{
-                    String Xfile ="images/X.png";
-                    Image X = new Image(Xfile, 100, 120, false, false);
-                    sp.getChildren().add(new ImageView(X));
-                    Thread.sleep(3000); 
-                    sp.getChildren().remove(X);
-                }catch(InterruptedException ex){
-                        ex.printStackTrace();
-                    }   
+                    //String.valueOf(mazo.getC_sacadas().get(n).getId()).equals(imagen.getId())
+                    if(false){
+                        System.out.println("ESTA ENTRANDO 2");
+                        ////////////////////////////////////////////////////////////
+                        Image X = new Image("images/esmeralda.png", 100, 120, false, false);
+                        imagen.setImage(X);
+                        sp.getChildren().add(imagen);
+            
+                    }else{
+                        try{
+                            Image X = new Image("src/main/resources/files/Imagenes/X.png", 100, 120, false, false);
+                            sp.getChildren().add(new ImageView(X));
+                            Thread.sleep(3000); 
+                            sp.getChildren().remove(X);
+                        }catch(InterruptedException ex){
+                                ex.printStackTrace();
+                            }   
             }
+                }catch(Exception e){
+                System.out.println(e.getMessage());
+                }
+            
             }
         
 }

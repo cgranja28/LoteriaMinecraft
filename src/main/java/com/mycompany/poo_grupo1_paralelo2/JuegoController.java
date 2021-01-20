@@ -56,7 +56,7 @@ public class JuegoController {
         
         juego.crearGrid(leftVBox,gridP, gridP2, gridP3);
         juego.leerAlineacion(leftVBox, alineacion);
-        MazoMove mostrar= new MazoMove();
+        MazoMove mostrar= new MazoMove(m);
         mostrar.start();
         
         
@@ -65,12 +65,13 @@ public class JuegoController {
     }
     
     private class MazoMove extends Thread{
-        
-        public MazoMove(){ 
+        Mazo m;
+        public MazoMove(Mazo m){ 
+            this.m = m;
         }
     @Override
     public void run() {
-        Mazo m = new Mazo();
+
         String rutaImg;
         Random rand = new Random();
    
@@ -78,7 +79,7 @@ public class JuegoController {
             int num = rand.nextInt(53)+1;
             if (!(m.getC_sacadas().contains(m.getMazo().get(num)))){
                 try{
-                    Thread.sleep(3000);//Tiempo de espera entre cada imagen de 3 segundos
+                    Thread.sleep(100);//Tiempo de espera entre cada imagen de 3 segundos
                     rutaImg="files/Imagenes/"+num+".png";//Ruta
                     Image img= new Image(rutaImg,200,200,false,false);//Creacion de la imagen a mostrar en la secuencia en pantalla
                     imgMazo.setImage(img);
