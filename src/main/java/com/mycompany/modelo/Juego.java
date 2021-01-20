@@ -162,7 +162,7 @@ public class Juego implements Serializable {
                 for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
                     
                     if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
-                        System.out.println("Entra al if");
+                        System.out.println("Entra  aal if");
                         stop = false;
                         match = true;
                     }   
