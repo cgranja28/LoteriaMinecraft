@@ -150,14 +150,34 @@ public class Juego implements Serializable {
                 sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
                 
                 imagen.setId(String.valueOf(c.getId()));
-                System.out.println(imagen.getId());
                 gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane
                 
                 
                 
                     imagen.setOnMouseClicked(e->{
+                        
+                    
+                    boolean match=false;
+            boolean stop = true; 
+                for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
+                    
+                    if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
+                        System.out.println("Entra al if");
+                        stop = false;
+                        match = true;
+                    }   
+                }
+                if(match){
+                sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
+                }else{
+                   
                     Xfile z= new Xfile(sp,imagen);
                     z.start();
+                
+                
+                }
+                    
+                    
                     });
                 
             }
@@ -230,37 +250,33 @@ public class Juego implements Serializable {
         @Override
         @FXML
         public void run() {
-            System.out.println("ESTA ENTRANDO 1");
             
-            for(int n=1;n<mazo.getC_sacadas().size()+1;n++){
-                System.out.println("SACADAS-MAZO "+mazo.getC_sacadas().get(n).getId());
-                System.out.println("MARCADA POR MUA "+imagen.getId()); 
-                try{
-                    //String.valueOf(mazo.getC_sacadas().get(n).getId()).equals(imagen.getId())
-                    if(false){
-                        System.out.println("ESTA ENTRANDO 2");
-                        ////////////////////////////////////////////////////////////
-                        Image X = new Image("images/esmeralda.png", 100, 120, false, false);
-                        imagen.setImage(X);
-                        sp.getChildren().add(imagen);
-            
-                    }else{
-                        try{
-                            Image X = new Image("src/main/resources/files/Imagenes/X.png", 100, 120, false, false);
-                            sp.getChildren().add(new ImageView(X));
-                            Thread.sleep(3000); 
+            try {
+                            ImageView X= new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false));
+                            sp.getChildren().add(X);
+                            Thread.sleep(3000);
                             sp.getChildren().remove(X);
-                        }catch(InterruptedException ex){
-                                ex.printStackTrace();
-                            }   
-            }
-                }catch(Exception e){
-                System.out.println(e.getMessage());
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+            /*
+            boolean match=false;
+            boolean stop = true; 
+                for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
+                    
+                    if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
+                        System.out.println("Entra al if");
+                        stop = false;
+                        match = true;
+                    }   
                 }
-            
+                if(match){
+                sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
+                }else{
+                sp.getChildren().add(new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false)));
+                }
+                */
+                }
             }
-        
-}
-}
 }
 
