@@ -6,6 +6,7 @@ import com.mycompany.modelo.Mazo;
 import com.mycompany.modelo.Tabla;
 import com.mycompany.modelo.Usuario;
 import java.io.*;
+import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -26,6 +27,7 @@ public class JuegoController {
     @FXML Button boton;
     @FXML VBox leftVBox;
     @FXML ImageView alineacion;
+    @FXML ImageView imgMazo;
     
     @FXML
     private void switchToPrimary() throws IOException {
@@ -52,15 +54,40 @@ public class JuegoController {
         Usuario usuario = new Usuario(user, t);
         Juego juego = new Juego(usuario, m);
         
-        juego.crearGridUsuario(gridP, true,100,120);
+        juego.crearGrid(leftVBox,gridP, gridP2, gridP3);
         juego.leerAlineacion(leftVBox, alineacion);
-        System.out.println(juego.getComputadoras().size());
-        int num_c=juego.getComputadoras().size();
-        juego.crearGridComputadora(juego, leftVBox, gridP2, gridP3, num_c);
+        MazoMove mostrar= new MazoMove();
+        mostrar.start();
         
         
         
         
     }
     
+    private class MazoMove extends Thread{
+        
+        public MazoMove(){ 
+        }
+    @Override
+    public void run() {
+        Mazo m = new Mazo();
+        String rutaImg;
+        Random rand = new Random();
+   
+        for(int i=1;i<m.getMazo().size();i++){//For para ir cambiando las rutas de las imagenes a mostrar en pantalla
+            int num = rand.nextInt(53)+1;
+            if (!(m.getC_sacadas().contains(m.getMazo().get(num)))){
+                try{
+                    Thread.sleep(3000);//Tiempo de espera entre cada imagen de 3 segundos
+                    rutaImg="files/Imagenes/"+num+".png";//Ruta
+                    Image img= new Image(rutaImg,200,200,false,false);//Creacion de la imagen a mostrar en la secuencia en pantalla
+                    imgMazo.setImage(img);
+                    m.getC_sacadas().add(m.getMazo().get(num));
+                }catch(InterruptedException ex){
+                    ex.printStackTrace();
+                }
+            }else{i--;}
+    }
+    }
+    }
 }

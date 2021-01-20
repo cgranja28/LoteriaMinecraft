@@ -19,7 +19,7 @@
          <right>
             <HBox fx:id="mazo" alignment="CENTER" prefHeight="329.0" prefWidth="234.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="199.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+                  <ImageView fx:id="imgMazo" fitHeight="199.0" fitWidth="153.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                      <image>
                         <Image url="@../../../files/Imagenes/back.png" />
                      </image>
