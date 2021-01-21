@@ -64,7 +64,7 @@ public class JuegoController {
         
     }
     
-    private class MazoMove extends Thread{
+    public class MazoMove extends Thread{
         Mazo m;
         public MazoMove(Mazo m){ 
             this.m = m;

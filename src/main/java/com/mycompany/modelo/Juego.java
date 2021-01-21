@@ -157,11 +157,10 @@ public class Juego implements Serializable {
                         
                     
                     boolean match=false;
-            boolean stop = true; 
+                    boolean stop = true; 
                 for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
                     
                     if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
-                        System.out.println("Entra  aal if");
                         stop = false;
                         match = true;
                     }   
@@ -169,10 +168,18 @@ public class Juego implements Serializable {
                 if(match){
                 sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
                 }else{
-                   
-                    Xfile z= new Xfile(sp,imagen);
-                    z.start();
-                
+                       
+                        try {
+                            
+                            ImageView checked=new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false));
+                            sp.getChildren().add(checked);
+                            System.out.println("ENTRA AL ELSE");
+                            Thread.sleep(1000);
+                            System.out.println("ENTRA AL ELSE 2");
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
+                    
                 
                 }
                     });
