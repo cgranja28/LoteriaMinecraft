@@ -74,20 +74,23 @@ public class JuegoController {
 
         String rutaImg;
         Random rand = new Random();
-   
-        for(int i=1;i<m.getMazo().size();i++){//For para ir cambiando las rutas de las imagenes a mostrar en pantalla
-            int num = rand.nextInt(53)+1;
+        for(int i=0;i<m.getMazo().size();i++){//For para ir cambiando las rutas de las imagenes a mostrar en pantalla
+            int num = rand.nextInt(54);
             if (!(m.getC_sacadas().contains(m.getMazo().get(num)))){
                 try{
-                    Thread.sleep(100);//Tiempo de espera entre cada imagen de 3 segundos
-                    rutaImg="files/Imagenes/"+num+".png";//Ruta
+
+                    rutaImg="files/Imagenes/"+m.getMazo().get(num).getId()+".png";//Ruta
                     Image img= new Image(rutaImg,200,200,false,false);//Creacion de la imagen a mostrar en la secuencia en pantalla
                     imgMazo.setImage(img);
                     m.getC_sacadas().add(m.getMazo().get(num));
+
+                    Thread.sleep(1000);//Tiempo de espera entre cada imagen de 3 segundos
+
                 }catch(InterruptedException ex){
                     ex.printStackTrace();
                 }
             }else{i--;}
+    
     }
     }
     }

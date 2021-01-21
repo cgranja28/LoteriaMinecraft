@@ -38,7 +38,6 @@ public class Juego implements Serializable {
             for(int j = 0; j <configuracion.getNumero_de_oponentes() ; j++){
                 Computadora c=new Computadora(new Tabla(mazo));
                 this.computadoras.add(c);
-                System.out.println(c);
             }  
         }
         
@@ -176,8 +175,6 @@ public class Juego implements Serializable {
                 
                 
                 }
-                    
-                    
                     });
                 
             }
@@ -251,21 +248,21 @@ public class Juego implements Serializable {
         @FXML
         public void run() {
             
-            try {
+            /*try {
                             ImageView X= new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false));
                             sp.getChildren().add(X);
                             Thread.sleep(3000);
                             sp.getChildren().remove(X);
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
-                        }
-            /*
+                        }*/
+            
             boolean match=false;
             boolean stop = true; 
                 for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
                     
                     if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
-                        System.out.println("Entra al if");
+                        //System.out.println("Entra al if");
                         stop = false;
                         match = true;
                     }   
@@ -275,7 +272,7 @@ public class Juego implements Serializable {
                 }else{
                 sp.getChildren().add(new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false)));
                 }
-                */
+                
                 }
             }
 }
