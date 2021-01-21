@@ -27,7 +27,7 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fitHeight="484.0" fitWidth="72.0" onMouseClicked="#switchToPrimary" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="loteria" fitHeight="484.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/LotteryBN.png" />
                      </image>

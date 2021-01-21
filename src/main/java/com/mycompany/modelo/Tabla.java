@@ -7,11 +7,11 @@ import java.util.Random;
 public class Tabla implements Serializable {
     private boolean loteria;
     private ArrayList<Carta> cartas;
-    private ArrayList<Boolean> c_marcadas;
+    private ArrayList<Carta> c_marcadas;
 
     public Tabla(Mazo m) {
         cartas = new ArrayList<Carta>();
-        c_marcadas = new ArrayList<Boolean>();
+        c_marcadas = new ArrayList<Carta>();
         Random rand = new Random();
         for (int i=0; i<16; i++){
             int num = rand.nextInt(54);
@@ -40,16 +40,16 @@ public class Tabla implements Serializable {
         this.cartas = cartas;
     }
 
-    public ArrayList<Boolean> getC_marcadas() {
+    public ArrayList<Carta> getC_marcadas() {
         return c_marcadas;
     }
 
-    public void setC_marcadas(ArrayList<Boolean> c_marcadas) {
+    public void setC_marcadas(ArrayList<Carta> c_marcadas) {
         this.c_marcadas = c_marcadas;
     }
 
     public void verificarCarta(Carta carta){
-        
+        c_marcadas.add(carta);
     }
     
     @Override

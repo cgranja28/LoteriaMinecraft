@@ -9,7 +9,10 @@ import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
+import java.util.ArrayList;
+import java.lang.*;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -31,6 +34,7 @@ public class Juego implements Serializable {
     public Juego(Usuario jugador, Mazo mazo) {
         usuario = jugador;
         configuracion = leerConfiguracion();
+        this.alineacion = configuracion.getAlineacion();
         this.mazo = mazo;
         mazo.crearMazo();
         this.computadoras = new ArrayList<Computadora>();
@@ -150,41 +154,39 @@ public class Juego implements Serializable {
                 
                 imagen.setId(String.valueOf(c.getId()));
                 gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane
+                  
                 
                 
-                
+                if(jugador){
                     imagen.setOnMouseClicked(e->{
                         
                     
                     boolean match=false;
                     boolean stop = true; 
-                for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
+                    for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
                     
-                    if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
-                        stop = false;
-                        match = true;
-                    }   
-                }
-                if(match){
-                sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
-                }else{
-                       
-                        try {
-                            
-                            ImageView checked=new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false));
-                            sp.getChildren().add(checked);
-                            System.out.println("ENTRA AL ELSE");
-                            Thread.sleep(1000);
-                            System.out.println("ENTRA AL ELSE 2");
-                        } catch (InterruptedException ex) {
-                            ex.printStackTrace();
+                        if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
+                            t.verificarCarta(mazo.getC_sacadas().get(j));
+                            stop = false;
+                            match = true;
+                        }   
+                    }
+                        if(match){
+                        sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
+                        }else{
+
+                            try {
+
+                                ImageView checked=new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false));
+                                sp.getChildren().add(checked);
+                                Thread.sleep(1000);
+                            } catch (InterruptedException ex) {
+                                ex.printStackTrace();
+                            }
                         }
-                    
-                
+                        });
+                    }
                 }
-                    });
-                
-            }
         }
         
         /////////////////////////////////////////////////////
@@ -206,7 +208,7 @@ public class Juego implements Serializable {
         }
         
         public void leerAlineacion(VBox leftVBox, ImageView imagen){
-            Configuracion settings=null;
+            /*Configuracion settings=null;
 		try {
 			InputStream file = new FileInputStream(App.pathSettigns);
 			InputStream buffer = new BufferedInputStream(file);
@@ -219,13 +221,12 @@ public class Juego implements Serializable {
 		}
 		catch(IOException ex){
 			ex.printStackTrace();
-		}
-            int ali= settings.getAlineacion().getId();
+		}*/
+            int ali= alineacion.getId();
             String pathaligment ="images/"+ali+".png";
             imagen = new ImageView(pathaligment);
             imagen.setFitHeight(200);
             imagen.setFitWidth(150);
-            //leftVBox.getChildren().add(imagen);
             leftVBox.getChildren().set(0, imagen);
 
         }
@@ -238,7 +239,8 @@ public class Juego implements Serializable {
         //LOTERIA
         public void loteria(){
         }
-
+        
+        
     @Override
     public String toString() {
         return "Juego{" + "id_juego=" + id_juego + ", usuario=" + usuario + ", mazo=" + mazo + ", alineacion=" + alineacion + ", configuracion=" + configuracion + ", duracion=" + duracion + ", fecha=" + fecha + '}';
@@ -264,23 +266,24 @@ public class Juego implements Serializable {
                             ex.printStackTrace();
                         }*/
             
-            boolean match=false;
-            boolean stop = true; 
-                for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
+        boolean match=false;
+        boolean stop = true; 
+            for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
+
+                if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
                     
-                    if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
-                        //System.out.println("Entra al if");
-                        stop = false;
-                        match = true;
-                    }   
-                }
-                if(match){
-                sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
-                }else{
-                sp.getChildren().add(new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false)));
-                }
-                
-                }
+                    
+                    stop = false;
+                    match = true;
+                }   
             }
+            if(match){
+            sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
+            }else{
+            sp.getChildren().add(new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false)));
+            }
+
+            }
+        }
 }
 

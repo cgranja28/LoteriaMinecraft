@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 public class PrimaryController {
     private String user;
@@ -25,13 +26,14 @@ public class PrimaryController {
     @FXML
     private Button bexit;
     @FXML
-    private Button breport;
-    
+    private Label errorLabel;
 
     @FXML
-    private void switchToSettings() throws IOException {
+    private void switchToSettings() throws IOException{
         user = tusername.getText();
-            try {
+        
+        if(!user.equals("")){
+        try {
             FileWriter writer = new FileWriter(App.pathJuego, false);
             writer.write(user);
             writer.close();
@@ -41,6 +43,10 @@ public class PrimaryController {
         }finally{
                 App.setRoot("settings");
             }
+        }else{
+            errorLabel.setText("DEBE INGRESAR UN NOMBRE");
+        }
+            
         
     }
     
