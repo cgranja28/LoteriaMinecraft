@@ -29,6 +29,7 @@ public class Juego implements Serializable {
     private double duracion;
     private Date fecha;
     private ArrayList<Computadora> computadoras;
+    private boolean hayGanador;
     
     //CONSTRUCTOR
     public Juego(Usuario jugador, Mazo mazo) {
@@ -113,10 +114,18 @@ public class Juego implements Serializable {
             this.computadoras = computadoras;
         }
         
+        public boolean getHayGanador() {
+            return hayGanador;
+        }
+
+        public void setHayGanador(boolean hayGanador) {
+            this.hayGanador = hayGanador;
+        }
+        
         
         
         public void crearGrid(VBox vbox,GridPane gridP,GridPane gridP1,GridPane gridP2) {
-            
+            boolean visible = configuracion.getVisibilidad();
             if(configuracion.getNumero_de_oponentes()==0){
             vbox.getChildren().remove(gridP1);
             vbox.getChildren().remove(gridP2);
@@ -132,21 +141,31 @@ public class Juego implements Serializable {
             //Tabla t = usuario.getTabla();
             Tabla  t=null;
             t=usuario.getTabla();
-            crearGridPantalla(t,gridP,true,100,120);
+            crearGridPantalla(t,gridP,true,100,120,visible);
              for(int n=0; n<computadoras.size(); n++){
                 t=computadoras.get(n).getTabla();
-                crearGridPantalla(t,gp.get(n),false,30,40);
+                crearGridPantalla(t,gp.get(n),false,30,40,visible);
             }
         }
         
-        public void crearGridPantalla(Tabla t,GridPane gridP,boolean jugador,int x,int y){
+        public void crearGridPantalla(Tabla t,GridPane gridP,boolean jugador,int x,int y, boolean visibility){
             Image image;
+            String fileName = "";
             for (int i=0;i<t.getCartas().size();i++){
                 StackPane sp = new StackPane();// Creacion stackpane
                 int fila = i/4;
                 int columna = i%4;
                 Carta c = t.getCartas().get(i);
-                String fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";// Creacion de rutas de las imagenes d elas cartas
+                
+                // Creacion de rutas de las imagenes d elas cartas
+                if(!jugador && !visibility){
+                    fileName ="files/Imagenes/back.png";
+                }else if(!jugador && visibility){
+                    fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";
+                }else {
+                    fileName ="files/Imagenes/"+String.valueOf(c.getId())+".png";
+                }
+                
                 image = new Image(fileName, x, y, false, false);
                 ImageView imagen = new ImageView(image);
                 
@@ -154,13 +173,9 @@ public class Juego implements Serializable {
                 
                 imagen.setId(String.valueOf(c.getId()));
                 gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane
-                  
-                
                 
                 if(jugador){
                     imagen.setOnMouseClicked(e->{
-                        
-                    
                     boolean match=false;
                     boolean stop = true; 
                     for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
@@ -175,14 +190,14 @@ public class Juego implements Serializable {
                         sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
                         }else{
 
-                            try {
+                            /*try {
 
                                 ImageView checked=new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false));
                                 sp.getChildren().add(checked);
                                 Thread.sleep(1000);
                             } catch (InterruptedException ex) {
                                 ex.printStackTrace();
-                            }
+                            }*/
                         }
                         });
                     }
@@ -208,20 +223,6 @@ public class Juego implements Serializable {
         }
         
         public void leerAlineacion(VBox leftVBox, ImageView imagen){
-            /*Configuracion settings=null;
-		try {
-			InputStream file = new FileInputStream(App.pathSettigns);
-			InputStream buffer = new BufferedInputStream(file);
-			ObjectInput input = new ObjectInputStream(buffer);
-			
-			 settings = (Configuracion)input.readObject();
-                         
-		} catch (ClassNotFoundException ex) {
-			ex.printStackTrace();
-		}
-		catch(IOException ex){
-			ex.printStackTrace();
-		}*/
             int ali= alineacion.getId();
             String pathaligment ="images/"+ali+".png";
             imagen = new ImageView(pathaligment);
@@ -256,16 +257,7 @@ public class Juego implements Serializable {
         @Override
         @FXML
         public void run() {
-            
-            /*try {
-                            ImageView X= new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false));
-                            sp.getChildren().add(X);
-                            Thread.sleep(3000);
-                            sp.getChildren().remove(X);
-                        } catch (InterruptedException ex) {
-                            ex.printStackTrace();
-                        }*/
-            
+             
         boolean match=false;
         boolean stop = true; 
             for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){

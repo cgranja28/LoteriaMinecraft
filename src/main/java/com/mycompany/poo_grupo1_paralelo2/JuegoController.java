@@ -1,21 +1,19 @@
 package com.mycompany.poo_grupo1_paralelo2;
 
 import com.mycompany.modelo.Alineacion;
-import com.mycompany.modelo.Carta;
+import com.mycompany.modelo.Computadora;
 import com.mycompany.modelo.Juego;
 import com.mycompany.modelo.Mazo;
 import com.mycompany.modelo.Tabla;
 import com.mycompany.modelo.Usuario;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -60,28 +58,30 @@ public class JuegoController {
         
         juego.crearGrid(leftVBox,gridP, gridP2, gridP3);
         juego.leerAlineacion(leftVBox, alineacion);
-        verificarAlineacion(juego);
         
-        MazoMove mostrar= new MazoMove(m);
+        
+        MazoMove mostrar= new MazoMove(m,juego);
         mostrar.start();
+        verificarAlineacion(juego, mostrar);
         
     }
     
-    public  void verificarAlineacion(Juego juego){
+    public  void verificarAlineacion(Juego juego, MazoMove mostrar){
+        
         boolean h=false;
-                loteria.setOnMouseClicked(e->{
-                    boolean q=true;
-                    Alineacion a=juego.getAlineacion();
-                    ArrayList<Integer> n = new ArrayList<Integer>();
-                    Tabla t = juego.getUsuario().getTabla();
-                    for (int k=0; k<t.getC_marcadas().size() && q;k++){
-                        try{
-                        int ind = t.getCartas().indexOf(t.getC_marcadas().get(k));
-                        n.add(ind);
-                        }catch(NullPointerException ex){
-                        System.out.println(ex.getMessage());
-                        }
-                    }
+        loteria.setOnMouseClicked(e->{
+            boolean q=true;
+            Alineacion a=juego.getAlineacion();
+            ArrayList<Integer> n = new ArrayList<Integer>();
+            Tabla t = juego.getUsuario().getTabla();
+            for (int k=0; k<t.getC_marcadas().size() && q;k++){
+                try{
+                int ind = t.getCartas().indexOf(t.getC_marcadas().get(k));
+                n.add(ind);
+                }catch(NullPointerException ex){
+                System.out.println(ex.getMessage());
+                }
+            }
             
             for (int i=0; i<a.getCombinaciones().size()&& q;i++){
                 
@@ -90,56 +90,130 @@ public class JuegoController {
                     if(n.containsAll(a.getCombinaciones().get(i))){
                         try {
                             juego.getUsuario().setGanador(true);
+                            juego.setHayGanador(true);
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Information Dialog");
                             alert.setHeaderText("Resultado de la operacion");
                             alert.setContentText("Ganaste c:");
                             alert.showAndWait();
                             App.setRoot("primary");
+                            mostrar.stop();
                             q=false;
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
                     }
-                    }
-                
+                } 
             }
-           });
-        }
-        
-        
-        
-    
-
+        });
+    }
     
     
     public class MazoMove extends Thread{
         Mazo m;
-        public MazoMove(Mazo m){ 
+        Juego j;
+        public MazoMove(Mazo m,Juego j){ 
             this.m = m;
+            this.j = j;
         }
         @Override
         public void run() {
-
+            moverMazo();
+        }
+        
+        
+        public void moverMazo(){
+            boolean h=true; 
             String rutaImg;
             Random rand = new Random();
-            for(int i=0;i<m.getMazo().size();i++){//For para ir cambiando las rutas de las imagenes a mostrar en pantalla
-                int num = rand.nextInt(54);
-                if (!(m.getC_sacadas().contains(m.getMazo().get(num)))){
-                    try{
+            if(!j.getHayGanador()){
+                for(int i=0;i<m.getMazo().size()&& h;i++){//For para ir cambiando las rutas de las imagenes a mostrar en pantalla
+                    int num = rand.nextInt(54);
+                    if (!(m.getC_sacadas().contains(m.getMazo().get(num)))){
+                        try{
 
-                        rutaImg="files/Imagenes/"+m.getMazo().get(num).getId()+".png";//Ruta
-                        Image img= new Image(rutaImg,200,200,false,false);//Creacion de la imagen a mostrar en la secuencia en pantalla
-                        imgMazo.setImage(img);
-                        m.getC_sacadas().add(m.getMazo().get(num));
+                            rutaImg="files/Imagenes/"+m.getMazo().get(num).getId()+".png";//Ruta
+                            Image img= new Image(rutaImg,200,250,false,false);//Creacion de la imagen a mostrar en la secuencia en pantalla
+                            imgMazo.setImage(img);
+                            m.getC_sacadas().add(m.getMazo().get(num));
 
-                        Thread.sleep(1000);//Tiempo de espera entre cada imagen de 3 segundos
+                            if(!j.getComputadoras().isEmpty() && !j.getHayGanador()){
+                                for (int n=0; n<j.getComputadoras().size(); n++){
+                                    if (j.getComputadoras().get(n).getTabla().getCartas().contains(m.getMazo().get(num))){
+                                        j.getComputadoras().get(n).getTabla().verificarCarta(m.getMazo().get(num));
 
-                    }catch(InterruptedException ex){
-                        ex.printStackTrace();
-                    }
-                }else{i--;}
+                                        jugabilidadOponentes juop =new jugabilidadOponentes(j.getComputadoras().get(n), m, j.getAlineacion(),j);
+                                        juop.setDaemon(true);
+                                        juop.start();
+                                        
+                                        if(j.getHayGanador()){
+                                            juop.stop();
+                                        }
+                                    }  
+                                }
+                            }
+                            Thread.sleep(3000);//Tiempo de espera entre cada imagen de 3 segundos
+                        }catch(InterruptedException ex){
+                            ex.printStackTrace();
+                        }
+                    }else{i--;}
+                }
             }
         }
+    }
+    private class jugabilidadOponentes extends Thread{
+        Computadora computadora;
+        Mazo m;
+        Alineacion a;
+        boolean hayGanador;
+        Juego juego;
+
+        public jugabilidadOponentes(Computadora computadora, Mazo m, Alineacion a, Juego juego) {
+            this.computadora = computadora;
+            this.m = m;
+            this.a = a;
+            this.hayGanador = juego.getHayGanador();
+            this.juego = juego;
+        }
+
+        @Override
+        public void run(){
+            loteriaCompu();
+        }
+        
+        public void loteriaCompu(){
+            if(!juego.getHayGanador()){
+                boolean q=true;
+                ArrayList<Integer> n = new ArrayList<Integer>();
+                Tabla t = computadora.getTabla();
+                for (int k=0; k<t.getC_marcadas().size() && q;k++){
+                    try{
+                    int ind = t.getCartas().indexOf(t.getC_marcadas().get(k));
+                    n.add(ind);
+                    }catch(NullPointerException ex){
+                    System.out.println(ex.getMessage());
+                    }
+                }
+
+                for (int i=0; i<a.getCombinaciones().size()&& q;i++){
+
+                    for (int j=0; j<a.getCombinaciones().get(i).size()&&q; j++){
+
+                        if(n.containsAll(a.getCombinaciones().get(i))){
+                            try {
+                                Thread.sleep(5000);
+                                App.setRoot("primary");
+                                juego.setHayGanador(true);
+                                q=false;
+                            } catch (IOException ex) {
+                                System.out.println(ex.getMessage());
+                            } catch (InterruptedException ex) {
+                                System.out.println(ex.getMessage());
+                            }
+                        }
+                    } 
+                }
+            }
+        } 
     }
 }
