@@ -30,7 +30,7 @@ public class JuegoController {
     @FXML ImageView alineacion;
     @FXML ImageView imgMazo;
     @FXML ImageView loteria;
-    
+
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
@@ -50,8 +50,8 @@ public class JuegoController {
         } catch (IOException e) {
             e.printStackTrace();
         }             
-        Mazo m = new Mazo();
         
+        Mazo m = new Mazo();
         Tabla t = new Tabla(m);
         Usuario usuario = new Usuario(user, t);
         Juego juego = new Juego(usuario, m);
@@ -141,16 +141,15 @@ public class JuegoController {
                             Image img= new Image(rutaImg,200,250,false,false);//Creacion de la imagen a mostrar en la secuencia en pantalla
                             imgMazo.setImage(img);
                             m.getC_sacadas().add(m.getMazo().get(num));
-
+                            
                             if(!j.getComputadoras().isEmpty() && !j.getHayGanador()){
                                 for (int n=0; n<j.getComputadoras().size(); n++){
                                     if (j.getComputadoras().get(n).getTabla().getCartas().contains(m.getMazo().get(num))){
                                         j.getComputadoras().get(n).getTabla().verificarCarta(m.getMazo().get(num));
-
                                         jugabilidadOponentes juop =new jugabilidadOponentes(j.getComputadoras().get(n), m, j.getAlineacion(),j);
                                         juop.setDaemon(true);
                                         juop.start();
-                                        
+                                 
                                         if(j.getHayGanador()){
                                             juop.stop();
                                         }
@@ -162,7 +161,7 @@ public class JuegoController {
                             ex.printStackTrace();
                         }
                     }else{i--;}
-                }
+                }     
             }
         }
     }

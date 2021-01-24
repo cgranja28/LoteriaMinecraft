@@ -2,13 +2,23 @@ package com.mycompany.modelo;
 
 import java.io.Serializable;
 import java.util.*;
-
+/**
+ * 
+ * @author Grupo1
+ * 
+ * 
+ */
 public class Alineacion implements Serializable {
     private int id;
     private String nombre;
     private ArrayList<List<Integer>> combinaciones;
-
-    //CONSTRUCTOR
+    
+  
+    /**
+     * CONSTRUCTOR
+     * @param id
+     * id necesario para crear alineacion deseada para el juego
+     */
     public Alineacion(int id) {
         this.id = id;
         Scanner sc= new Scanner(System.in);
@@ -18,6 +28,9 @@ public class Alineacion implements Serializable {
             int op = id;
             switch (op){
               //****************************************ALINEACION 1*****************************************************
+              /**
+               * Combinaciones posibles para la alineacion de Fila
+               */
               case 0:
                 nombre="FILA";
                 combinaciones= new ArrayList<List<Integer>>();
@@ -27,6 +40,9 @@ public class Alineacion implements Serializable {
                 combinaciones.add(new ArrayList<>(Arrays.asList(12, 13, 14, 15)));
                 break;
               //****************************************ALINEACION 2*****************************************************
+              /**
+               * Combinaciones posibles para la alineacion de Columna
+               */
               case 1:
                 nombre="COLUMNA";
                 combinaciones= new ArrayList<List<Integer>>();
@@ -36,12 +52,18 @@ public class Alineacion implements Serializable {
                 combinaciones.add(new ArrayList<>(Arrays.asList(3, 7, 11, 15)));
                 break;
               //****************************************ALINEACION 3*****************************************************
+              /**
+               * Combinaciones posibles para la alineacion de Esquinas
+               */
               case 2:
                 nombre="ESQUINAS";
                 combinaciones= new ArrayList<List<Integer>>();
                 combinaciones.add(new ArrayList<>(Arrays.asList(0, 3, 12,15)));
                 break;
               //****************************************ALINEACION 4*****************************************************
+              /**
+               * Combinaciones posibles para la alineacion juntas 4 en esquinas
+               */
               case 3    :
                 nombre="JUNTAS 4 EN ESQUINAS";
                 combinaciones= new ArrayList<List<Integer>>();
@@ -64,7 +86,7 @@ public class Alineacion implements Serializable {
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -76,7 +98,11 @@ public class Alineacion implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    /**
+     * 
+     * @return
+     * retorna 
+     */
     public ArrayList<List<Integer>> getCombinaciones() {
         return combinaciones;
     }

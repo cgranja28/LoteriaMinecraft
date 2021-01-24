@@ -188,10 +188,10 @@ public class Juego implements Serializable {
                 ImageView imagen = new ImageView(image);
                 
                 sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
-                
+                sp.setId(String.valueOf(c.getId()));
                 imagen.setId(String.valueOf(c.getId()));
-                gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane
-                
+                gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane  
+                gridP.setId(String.valueOf(c.getId()));
                 if(jugador){
                     imagen.setOnMouseClicked(e->{
                     boolean match=false;
@@ -206,20 +206,10 @@ public class Juego implements Serializable {
                     }
                         if(match){
                         sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
-                        }else{
-
-                            /*try {
-
-                                ImageView checked=new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false));
-                                sp.getChildren().add(checked);
-                                Thread.sleep(1000);
-                            } catch (InterruptedException ex) {
-                                ex.printStackTrace();
-                            }*/
                         }
                         });
                     }
-                }
+            }
         }
         
         /////////////////////////////////////////////////////
