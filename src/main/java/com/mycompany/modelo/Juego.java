@@ -26,11 +26,12 @@ public class Juego implements Serializable {
    //La variable alineacion esta con mayusculas en el diagrama (Cambiar)
     private Alineacion alineacion;
     private Configuracion configuracion;
-    private double duracion;
+    private long initialTime;
+    private long finalTime;
     private Date fecha;
     private ArrayList<Computadora> computadoras;
     private boolean hayGanador;
-    
+    private long duracion;
     //CONSTRUCTOR
     public Juego(Usuario jugador, Mazo mazo) {
         usuario = jugador;
@@ -90,11 +91,11 @@ public class Juego implements Serializable {
             this.configuracion = configuracion;
         }
         /////////////////////////////////////////////////////
-        public double getDuracion() {
+        public long getDuracion() {
             return duracion;
         }
         /////////////////////////////////////////////////////
-        public void setDuracion(double duracion) {
+        public void setDuracion(long duracion) {
             this.duracion = duracion;
         }
         /////////////////////////////////////////////////////
@@ -105,22 +106,39 @@ public class Juego implements Serializable {
         public void setFecha(Date fecha) {
             this.fecha = fecha;
         }
-
+        /////////////////////////////////////////////////////
         public ArrayList<Computadora> getComputadoras() {
             return computadoras;
         }
-
+        /////////////////////////////////////////////////////
         public void setComputadoras(ArrayList<Computadora> computadoras) {
             this.computadoras = computadoras;
         }
-        
+        /////////////////////////////////////////////////////
         public boolean getHayGanador() {
             return hayGanador;
         }
-
+        /////////////////////////////////////////////////////
         public void setHayGanador(boolean hayGanador) {
             this.hayGanador = hayGanador;
         }
+        /////////////////////////////////////////////////////
+        public long getInitialTime() {
+            return initialTime;
+        }
+        /////////////////////////////////////////////////////
+        public void setInitialTime(long initialTime) {
+            this.initialTime = initialTime;
+        }
+        /////////////////////////////////////////////////////
+        public long getFinalTime() {
+            return finalTime;
+        }
+        /////////////////////////////////////////////////////
+        public void setFinalTime(long finalTime) {
+            this.finalTime = finalTime;
+        }
+        
         
         
         
@@ -244,7 +262,7 @@ public class Juego implements Serializable {
         
     @Override
     public String toString() {
-        return "Juego{" + "id_juego=" + id_juego + ", usuario=" + usuario + ", mazo=" + mazo + ", alineacion=" + alineacion + ", configuracion=" + configuracion + ", duracion=" + duracion + ", fecha=" + fecha + '}';
+        return "Juego{" + "id_juego=" + id_juego + ", usuario=" + usuario + ", mazo=" + mazo + ", alineacion=" + alineacion + ", configuracion=" + configuracion + ", fecha=" + fecha + '}';
     }
      
      public class Xfile extends Thread{

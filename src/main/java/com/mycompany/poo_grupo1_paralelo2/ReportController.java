@@ -5,33 +5,50 @@
  */
 package com.mycompany.poo_grupo1_paralelo2;
 
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableView;
-
-/**
- * FXML Controller class
- *
- * @author Elix
- */
-public class ReportController implements Initializable {
+import javafx.scene.control.ListView;
+public class ReportController{
     @FXML
-    private TableView<?> tbReport;
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    private ListView<String> listReport;
+    ObservableList list = FXCollections.observableArrayList();
+    public void initialize() {
+     leerReporte();           
     }    
 
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
+        
     }
     
+    
+    private void leerReporte(){
+        try {
+            FileReader reader = new FileReader(App.pathReport);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) { 
+                list.removeAll(list);
+                list.add(line);
+                listReport.getItems().addAll(list);
+                
+            }
+            reader.close();
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    
+    }
+
 }

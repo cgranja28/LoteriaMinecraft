@@ -1,14 +1,14 @@
 package com.mycompany.poo_grupo1_paralelo2;
-
-import com.mycompany.modelo.Alineacion;
 import com.mycompany.modelo.Computadora;
-import com.mycompany.modelo.Juego;
-import com.mycompany.modelo.Mazo;
-import com.mycompany.modelo.Tabla;
-import com.mycompany.modelo.Usuario;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import com.mycompany.modelo.Alineacion;
+import com.mycompany.modelo.Juego;
+import com.mycompany.modelo.Mazo;
+import com.mycompany.modelo.Reporte;
+import com.mycompany.modelo.Tabla;
+import com.mycompany.modelo.Usuario;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.fxml.FXML;
@@ -55,7 +55,7 @@ public class JuegoController {
         Tabla t = new Tabla(m);
         Usuario usuario = new Usuario(user, t);
         Juego juego = new Juego(usuario, m);
-        
+        juego.setInitialTime(System.currentTimeMillis());
         juego.crearGrid(leftVBox,gridP, gridP2, gridP3);
         juego.leerAlineacion(leftVBox, alineacion);
         
@@ -96,6 +96,11 @@ public class JuegoController {
                             alert.setHeaderText("Resultado de la operacion");
                             alert.setContentText("Ganaste c:");
                             alert.showAndWait();
+                            juego.setFinalTime(System.currentTimeMillis());//OBTENCION DE TIEMPO FINAL
+                            juego.setDuracion((juego.getFinalTime()-juego.getInitialTime())/1000);
+                         
+                            Reporte report = new Reporte(juego);
+                            report.crearReporte();
                             App.setRoot("primary");
                             mostrar.stop();
                             q=false;

@@ -17,6 +17,7 @@ public class App extends Application {
     private static Scene scene;
     public static String pathSettigns = "outfiles/settings.ser";
     public static String pathJuego = "src/main/resources/files/user.txt";
+    public static String pathReport = "outfiles/report.txt";
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 1050, 599); //900,506
