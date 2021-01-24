@@ -101,12 +101,12 @@ public class Alineacion implements Serializable {
     /**
      * 
      * @return
-     * retorna 
+     * retorna un ArrayList de arreglos de enteros con la combinaciones cposibles de alineacion
      */
     public ArrayList<List<Integer>> getCombinaciones() {
         return combinaciones;
     }
-
+ 
     public void setCombinaciones(ArrayList<List<Integer>> combinaciones) {
         this.combinaciones = combinaciones;
     }

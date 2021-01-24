@@ -3,12 +3,20 @@ package com.mycompany.modelo;
 
 import java.io.Serializable;
 import java.util.Random;
-
+/**
+ * 
+ * @author Grupo1
+ */
 public class Configuracion  implements Serializable{
     private int numero_de_oponentes;
     private boolean visibilidad;
     private Alineacion alineacion;
-    
+    /**
+     * 
+     * @param numero_de_oponentes
+     * @param visibilidad 
+     * atributos para crear configuracion del juego a ejecutar
+     */
     //CONSTRUCTOR
     public Configuracion(int numero_de_oponentes, boolean visibilidad){
         this.numero_de_oponentes = numero_de_oponentes;
@@ -43,7 +51,11 @@ public class Configuracion  implements Serializable{
             this.alineacion = alineacion;
         }
 
-        
+        /**
+         * 
+         * @return
+         * retorna una alineacion random para el juego a ejecutar
+         */
         
         public Alineacion crearAlineacion(){
             Random rand = new Random();
@@ -51,7 +63,7 @@ public class Configuracion  implements Serializable{
             Alineacion alinea = new Alineacion(id_alinea);
             return alinea;
         }
-
+        
     @Override
     public String toString() {
         return "Configuracion{" + "numero_de_oponentes=" + numero_de_oponentes + ", visibilidad=" + visibilidad + '}';

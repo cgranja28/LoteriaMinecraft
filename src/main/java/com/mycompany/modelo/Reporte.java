@@ -6,17 +6,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * 
+ * @author Grupo1
+ */
 public class Reporte implements Serializable {
-    LocalDate localDate = LocalDate.now();
+    LocalDate localDate ;
     private Juego juego;
     private String date;
     private String duration;
     private String name;
     private String opponents;
     private String alignment;
-
+    /**
+     * 
+     * @param juego 
+     * Recibe un juego para extraer los datos necesarios para mostrarlos en la ventana reporte
+     */
     public Reporte(Juego juego) {
+        this.localDate= LocalDate.now();
         this.juego = juego;
         this.date=localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.duration=String.valueOf(juego.getDuracion());
@@ -25,23 +33,18 @@ public class Reporte implements Serializable {
         this.alignment=juego.getAlineacion().getNombre();
     }
 
-    public Reporte(String date, String duration, String name, String opponents, String alignment) {
-        this.date = date;
-        this.duration = duration;
-        this.name=name;
-        this.opponents = opponents;
-        this.alignment = alignment;
-    }
     
     
     
     
     public void crearReporte(){
-        //fecha, duración, nombre del usuario, cantidad de oponentes, alineación
-        //aqui serializar el arraylist de reporteJuego, crear archivo en la carpeta recursos
+        /**
+         * fecha, duración, nombre del usuario, cantidad de oponentes, alineación
+         * aqui serializar el arraylist de reporteJuego, crear archivo en la carpeta recursos
+        */
         
         try {
-            FileWriter writer = new FileWriter(App.pathReport,true);//true significa que escribe al final del archivo
+            FileWriter writer = new FileWriter(App.pathReport,true);/*true significa que escribe al final del archivo*/
             BufferedWriter bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(
             "Date: "+date+" | "+

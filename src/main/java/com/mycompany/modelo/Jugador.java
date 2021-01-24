@@ -2,12 +2,20 @@
 package com.mycompany.modelo;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author Grupo1
+ */
 public abstract class Jugador implements Serializable {
     private boolean ganador;
     private Tabla tabla;
     
     //CONSTRUCTOR
+    /**
+     * 
+     * @param tabla
+     * tabla linkeada al jugador creado
+     */
     public Jugador(Tabla tabla){
         this.tabla=tabla;
         this.ganador=false;

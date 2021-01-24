@@ -25,7 +25,6 @@ public class JuegoController {
     @FXML GridPane gridP2;
     @FXML GridPane gridP3;
     @FXML BorderPane bP;
-    @FXML Button boton;
     @FXML VBox leftVBox;
     @FXML ImageView alineacion;
     @FXML ImageView imgMazo;
@@ -50,22 +49,39 @@ public class JuegoController {
         } catch (IOException e) {
             e.printStackTrace();
         }             
-        
+        /**
+         * Creacion de los objetos para ejecutar el juego
+         */
         Mazo m = new Mazo();
         Tabla t = new Tabla(m);
         Usuario usuario = new Usuario(user, t);
         Juego juego = new Juego(usuario, m);
+        /**
+         * Contador de tiempo de duracion del juego al ejecutarlo
+         */
         juego.setInitialTime(System.currentTimeMillis());
+        /**
+         * Creacion de grid de los jugadores
+         */
         juego.crearGrid(leftVBox,gridP, gridP2, gridP3);
         juego.leerAlineacion(leftVBox, alineacion);
-        
-        
+        /**
+         * Llamada al hilo que controlorará el movimiento del mazo 
+         */
         MazoMove mostrar= new MazoMove(m,juego);
         mostrar.start();
+        /**
+         * Verificacion del loteria
+         */
         verificarAlineacion(juego, mostrar);
         
     }
-    
+    /**
+     * 
+     * @param juego
+     * @param mostrar 
+     * Metodo encargado de validar loteria del jugador y computadora
+     */
     public  void verificarAlineacion(Juego juego, MazoMove mostrar){
         
         boolean h=false;
@@ -77,18 +93,22 @@ public class JuegoController {
             for (int k=0; k<t.getC_marcadas().size() && q;k++){
                 try{
                 int ind = t.getCartas().indexOf(t.getC_marcadas().get(k));
-                n.add(ind);
+                n.add(ind);/*Extrae los indices de las cartas marcadas del tblero del usuario*/
                 }catch(NullPointerException ex){
                 System.out.println(ex.getMessage());
                 }
             }
-            
+            /**
+             * Comporbacion de todas las combinaciones posibles de la alineacion del juego
+             */
             for (int i=0; i<a.getCombinaciones().size()&& q;i++){
                 
                 for (int j=0; j<a.getCombinaciones().get(i).size()&&q; j++){
     
                     if(n.containsAll(a.getCombinaciones().get(i))){
-                        try {
+                        try {/**
+                         * En caso de ser ganador aparece alerta al jugador
+                         */
                             juego.getUsuario().setGanador(true);
                             juego.setHayGanador(true);
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -98,10 +118,9 @@ public class JuegoController {
                             alert.showAndWait();
                             juego.setFinalTime(System.currentTimeMillis());//OBTENCION DE TIEMPO FINAL
                             juego.setDuracion((juego.getFinalTime()-juego.getInitialTime())/1000);
-                         
                             Reporte report = new Reporte(juego);
                             report.crearReporte();
-                            App.setRoot("primary");
+                            App.setRoot("primary");/*Se lo redirige a la ventana principal*/
                             mostrar.stop();
                             q=false;
                         } catch (IOException ex) {
@@ -113,7 +132,9 @@ public class JuegoController {
         });
     }
     
-    
+    /**
+     * Hilo para movimiento del mazo
+     */
     public class MazoMove extends Thread{
         Mazo m;
         Juego j;
@@ -126,26 +147,30 @@ public class JuegoController {
             moverMazo();
         }
         
-        
+        /**
+         * Metodo a usar
+         */
         public void moverMazo(){
             boolean h=true; 
             String rutaImg;
             Random rand = new Random();
             if(!j.getHayGanador()){
-                for(int i=0;i<m.getMazo().size()&& h;i++){//For para ir cambiando las rutas de las imagenes a mostrar en pantalla
+                for(int i=0;i<m.getMazo().size()&& h;i++){/*For para ir cambiando las rutas de las imagenes a mostrar en pantalla*/
                     int num = rand.nextInt(54);
-                    if (!(m.getC_sacadas().contains(m.getMazo().get(num)))){
+                    if (!(m.getC_sacadas().contains(m.getMazo().get(num)))){/*Validacion de cartas sacadas randonmente en el mazo*/
                         try{
-
                             rutaImg="files/Imagenes/"+m.getMazo().get(num).getId()+".png";//Ruta
                             Image img= new Image(rutaImg,200,250,false,false);//Creacion de la imagen a mostrar en la secuencia en pantalla
                             imgMazo.setImage(img);
                             m.getC_sacadas().add(m.getMazo().get(num));
                             
-                            if(!j.getComputadoras().isEmpty() && !j.getHayGanador()){
+                            if(!j.getComputadoras().isEmpty() && !j.getHayGanador()){/*Validacion de loteria de los oponentes*/
                                 for (int n=0; n<j.getComputadoras().size(); n++){
                                     if (j.getComputadoras().get(n).getTabla().getCartas().contains(m.getMazo().get(num))){
                                         j.getComputadoras().get(n).getTabla().verificarCarta(m.getMazo().get(num));
+                                        /**
+                                         * Llamada al hilo que controlará la verificacion de loteria de los oponentes
+                                         */
                                         jugabilidadOponentes juop =new jugabilidadOponentes(j.getComputadoras().get(n), m, j.getAlineacion(),j);
                                         juop.setDaemon(true);
                                         juop.start();
@@ -160,18 +185,32 @@ public class JuegoController {
                         }catch(InterruptedException ex){
                             ex.printStackTrace();
                         }
-                    }else{i--;}
+                    }else{i--;}/**
+                     * En caso de que el random repita el numero no se perderá iteraciones puesto que se descontará uno en caso de 
+                     * darse el caso
+                     */
                 }     
             }
         }
     }
+    /**
+     * Hilo de jubailidad de oponentes
+     */
     private class jugabilidadOponentes extends Thread{
         Computadora computadora;
         Mazo m;
         Alineacion a;
         boolean hayGanador;
         Juego juego;
-
+        /**
+         * 
+         * @param computadora
+         * @param m
+         * @param a
+         * @param juego 
+         * Atributos para verficar y controlar que las cartas del computador se marquen y en caso de ganar
+         * se le de la loteria
+         */
         public jugabilidadOponentes(Computadora computadora, Mazo m, Alineacion a, Juego juego) {
             this.computadora = computadora;
             this.m = m;
@@ -184,7 +223,9 @@ public class JuegoController {
         public void run(){
             loteriaCompu();
         }
-        
+        /**
+         * Metodo loteriaCompu
+         */
         public void loteriaCompu(){
             if(!juego.getHayGanador()){
                 boolean q=true;
@@ -193,21 +234,29 @@ public class JuegoController {
                 for (int k=0; k<t.getC_marcadas().size() && q;k++){
                     try{
                     int ind = t.getCartas().indexOf(t.getC_marcadas().get(k));
-                    n.add(ind);
+                    n.add(ind);/**
+                     * Extrae indices de la tabla de las cartas marcadas para que gane el computador
+                     */
                     }catch(NullPointerException ex){
                     System.out.println(ex.getMessage());
                     }
                 }
-
+                    /**
+                     * Verificacion de todas las combinaciones posibles de la alineacion del juego
+                     */
                 for (int i=0; i<a.getCombinaciones().size()&& q;i++){
 
                     for (int j=0; j<a.getCombinaciones().get(i).size()&&q; j++){
 
                         if(n.containsAll(a.getCombinaciones().get(i))){
-                            try {
+                            try {/**
+                             * En caso de completar alguna alineacion se espera 5 segundos
+                             */
                                 Thread.sleep(5000);
                                 App.setRoot("primary");
-                                juego.setHayGanador(true);
+                                juego.setHayGanador(true);/**
+                                 * Si pasa este tiempo se redirige al usuario automaticamente a la pagina principal
+                                 */
                                 q=false;
                             } catch (IOException ex) {
                                 System.out.println(ex.getMessage());

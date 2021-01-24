@@ -1,11 +1,19 @@
 package com.mycompany.modelo;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author Grupo1
+ */
 public class Carta implements Serializable {
     private int id;
     private String nombre;
-
+/**
+ * 
+ * @param id
+ * @param nombre
+ * Atributos para la creacion de cartas
+ */
     public Carta(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;

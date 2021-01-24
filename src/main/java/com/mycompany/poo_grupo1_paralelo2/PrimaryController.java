@@ -4,17 +4,8 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import com.mycompany.modelo.*;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 public class PrimaryController {
     private String user;
     @FXML
@@ -29,9 +20,14 @@ public class PrimaryController {
     private Label errorLabel;
 
     @FXML
+    /**
+     * Cambia de escena a configuracion
+     */
     private void switchToSettings() throws IOException{
         user = tusername.getText();
-        
+        /**
+         * Verifica que el campo de juego no este vacio
+         */
         if(!user.equals("")){
         try {
             FileWriter writer = new FileWriter(App.pathJuego, false);
@@ -51,6 +47,9 @@ public class PrimaryController {
     }
     
     @FXML
+    /**
+     * Cambio de escena a reporte
+     */
     private void switchToReporte() throws IOException {
         App.setRoot("report");
     }

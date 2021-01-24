@@ -1,26 +1,24 @@
 package com.mycompany.modelo;
 import com.mycompany.poo_grupo1_paralelo2.App;
-import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
 import java.util.ArrayList;
-import java.lang.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+/**
+ * 
+ * @author Grupo1
+ */
 public class Juego implements Serializable {
     
-    private int id_juego;
     private Usuario usuario;
     private Mazo mazo;
    //La variable alineacion esta con mayusculas en el diagrama (Cambiar)
@@ -28,11 +26,18 @@ public class Juego implements Serializable {
     private Configuracion configuracion;
     private long initialTime;
     private long finalTime;
-    private Date fecha;
     private ArrayList<Computadora> computadoras;
     private boolean hayGanador;
     private long duracion;
     //CONSTRUCTOR
+    /**
+     * 
+     * @param jugador
+     * @param mazo
+     * Atributos para crear el objeto juego.
+     * Mazo contendrá las 54 cartas disponibles
+     * 
+     */
     public Juego(Usuario jugador, Mazo mazo) {
         usuario = jugador;
         configuracion = leerConfiguracion();
@@ -40,7 +45,9 @@ public class Juego implements Serializable {
         this.mazo = mazo;
         mazo.crearMazo();
         this.computadoras = new ArrayList<Computadora>();
-        if (configuracion.getNumero_de_oponentes()!=0) {
+        if (configuracion.getNumero_de_oponentes()!=0) {/**
+         * Crea los oponentes necesarios elegidos en la ventana de configuracion antes de inciar el juego
+         */
             for(int j = 0; j <configuracion.getNumero_de_oponentes() ; j++){
                 Computadora c=new Computadora(new Tabla(mazo));
                 this.computadoras.add(c);
@@ -51,13 +58,7 @@ public class Juego implements Serializable {
     
     //METODOS
         //GETTERS AND SETTERS 
-        public int getId_juego() {
-            return id_juego;
-        }
-        /////////////////////////////////////////////////////
-        public void setId_juego(int id_juego) {
-            this.id_juego = id_juego;
-        }
+
         /////////////////////////////////////////////////////
         public Usuario getUsuario() {
             return usuario;
@@ -99,14 +100,6 @@ public class Juego implements Serializable {
             this.duracion = duracion;
         }
         /////////////////////////////////////////////////////
-        public Date getFecha() {
-            return fecha;
-        }
-        /////////////////////////////////////////////////////
-        public void setFecha(Date fecha) {
-            this.fecha = fecha;
-        }
-        /////////////////////////////////////////////////////
         public ArrayList<Computadora> getComputadoras() {
             return computadoras;
         }
@@ -140,16 +133,30 @@ public class Juego implements Serializable {
         }
         
         
-        
-        
+        /**
+         * 
+         * @param vbox
+         * @param gridP
+         * @param gridP1
+         * @param gridP2 
+         * 
+         * GridPane 1,2 y 3 utilizados para introducir las cartas de los tableros de cada jugador
+         * Vbox se ubicaran los grids de los oponentes
+         */
         public void crearGrid(VBox vbox,GridPane gridP,GridPane gridP1,GridPane gridP2) {
             boolean visible = configuracion.getVisibilidad();
-            if(configuracion.getNumero_de_oponentes()==0){
+            if(configuracion.getNumero_de_oponentes()==0){/**
+             * Si numero de oponentes es 0 se quitan de la ventana de juego los grids asignados a los oponentes
+             */
             vbox.getChildren().remove(gridP1);
             vbox.getChildren().remove(gridP2);
             }
-            else if(configuracion.getNumero_de_oponentes()==1){
-                gridP1.setMaxSize(160, 160);
+            else if(configuracion.getNumero_de_oponentes()==1){/**
+             * Si es igual a 1 entonces se quita solamente un gridpane del oponente
+             */
+                gridP1.setMaxSize(160, 160);/**
+                 * Se estable el tamaño del gridpane del oponente
+                 */
                 vbox.getChildren().remove(2);
             }
             
@@ -159,23 +166,41 @@ public class Juego implements Serializable {
             //Tabla t = usuario.getTabla();
             Tabla  t=null;
             t=usuario.getTabla();
+            /**
+             * Crea el gridpane del usuario
+             */
             crearGridPantalla(t,gridP,true,100,120,visible);
+            /**
+             * Crea los gridpane de los oponentes segun el numero de oponentes asignados
+             */
              for(int n=0; n<computadoras.size(); n++){
                 t=computadoras.get(n).getTabla();
                 crearGridPantalla(t,gp.get(n),false,30,40,visible);
             }
         }
-        
+        /**
+         * 
+         * @param t
+         * @param gridP
+         * @param jugador
+         * @param x
+         * @param y
+         * @param visibility 
+         * Se envia los parametros para crear el gridpane ya sea de usuario u oponentes segun datos receptados
+         */
         public void crearGridPantalla(Tabla t,GridPane gridP,boolean jugador,int x,int y, boolean visibility){
             Image image;
             String fileName = "";
             for (int i=0;i<t.getCartas().size();i++){
-                StackPane sp = new StackPane();// Creacion stackpane
+                StackPane sp = new StackPane();/**
+                 * Creacion de stackpane
+                 */
                 int fila = i/4;
                 int columna = i%4;
                 Carta c = t.getCartas().get(i);
-                
-                // Creacion de rutas de las imagenes d elas cartas
+                /**
+                 * Creacion de rutas de las imagenes de las cartas
+                 */
                 if(!jugador && !visibility){
                     fileName ="files/Imagenes/back.png";
                 }else if(!jugador && visibility){
@@ -187,23 +212,26 @@ public class Juego implements Serializable {
                 image = new Image(fileName, x, y, false, false);
                 ImageView imagen = new ImageView(image);
                 
-                sp.getChildren().add(imagen);// Se añade la imagen al Stackpane
+                sp.getChildren().add(imagen);/* Se añade la imagen al Stackpane*/
                 sp.setId(String.valueOf(c.getId()));
                 imagen.setId(String.valueOf(c.getId()));
-                gridP.add(sp, columna, fila);// Se añade el stackpane al GridPane  
+                gridP.add(sp, columna, fila);/* Se añade el stackpane al GridPane*/
                 gridP.setId(String.valueOf(c.getId()));
                 if(jugador){
+                    /**
+                     * Metodo EventHandler para marcar cartas seleccionadas en el tablero del juego por el jugador
+                     */
                     imagen.setOnMouseClicked(e->{
                     boolean match=false;
                     boolean stop = true; 
                     for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
-                    
+                        /*Valida que la carta seleccionada haya salido en el mazo*/
                         if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
                             t.verificarCarta(mazo.getC_sacadas().get(j));
                             stop = false;
                             match = true;
                         }   
-                    }
+                    }   /*Si encuentra la carta seleccionada la marca con una esmeralda*/
                         if(match){
                         sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
                         }
@@ -213,6 +241,9 @@ public class Juego implements Serializable {
         }
         
         /////////////////////////////////////////////////////
+        /*
+        *Desearealiza el documento de settings necesario para extraer la configuracion seleccionada por el usuario
+        */
         public Configuracion leerConfiguracion(){
            ObjectInputStream in;
         Configuracion confi=null;
@@ -230,6 +261,13 @@ public class Juego implements Serializable {
         return confi;
         }
         
+        /**
+         * 
+         * @param leftVBox
+         * @param imagen 
+         * Crear el imageview necesario para mostrar la carta de alineacion seleccionada aleatoriamente en pantalla
+         * al ejecutar el juego
+         */
         public void leerAlineacion(VBox leftVBox, ImageView imagen){
             int ali= alineacion.getId();
             String pathaligment ="images/"+ali+".png";
@@ -240,50 +278,11 @@ public class Juego implements Serializable {
 
         }
         
-        //INICIAR JUEGO 
-        public void iniciarJuego() {
-            
-        }
-        /////////////////////////////////////////////////////
-        //LOTERIA
-        public void loteria(){
-        }
-        
         
     @Override
     public String toString() {
-        return "Juego{" + "id_juego=" + id_juego + ", usuario=" + usuario + ", mazo=" + mazo + ", alineacion=" + alineacion + ", configuracion=" + configuracion + ", fecha=" + fecha + '}';
+        return "Juego{" + "usuario=" + usuario + ", mazo=" + mazo + ", alineacion=" + alineacion + ", configuracion=" + configuracion + '}';
     }
      
-     public class Xfile extends Thread{
-        StackPane sp;
-        ImageView imagen;
-        public Xfile(StackPane sp,ImageView imagen){
-            this.sp=sp;
-            this.imagen=imagen;
-        }
-        @Override
-        @FXML
-        public void run() {
-             
-        boolean match=false;
-        boolean stop = true; 
-            for(int j=0; j<mazo.getC_sacadas().size() && stop; j++){
-
-                if(String.valueOf(mazo.getC_sacadas().get(j).getId()).equals(imagen.getId())){
-                    
-                    
-                    stop = false;
-                    match = true;
-                }   
-            }
-            if(match){
-            sp.getChildren().add(new ImageView(new Image("images/esmeralda.png", 100, 120, false, false)));
-            }else{
-            sp.getChildren().add(new ImageView(new Image("files/Imagenes/X.png", 100, 120, false, false)));
-            }
-
-            }
-        }
 }
 

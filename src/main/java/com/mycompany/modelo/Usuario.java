@@ -2,11 +2,21 @@
 package com.mycompany.modelo;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author Grupo1
+ */
 public class Usuario extends Jugador implements Serializable {
    private String nombre;
     
    //CONSTRUCTOR
+   /**
+    * 
+    * @param nombre
+    * @param tabla 
+    * nombre extraido del campo de texto llenado por el usuario
+    * y tabla unica para el
+    */
     public Usuario(String nombre, Tabla tabla) {
         super(tabla);
         this.nombre = nombre;
